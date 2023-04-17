@@ -1,0 +1,40 @@
+{
+  "name": "IP app",
+  "version": "1.0.0",
+  "description": "",
+  "type": "module",
+  "engines": {
+    "node": ">=16.0.0"
+  },
+  "scripts": {
+    "build": "rimraf ./build && npx tsc",
+    "remove": "docker rm -f -v container-ip && docker rmi -f ip-node-app",
+    "docker-build": "docker build -t ip-node-app .",
+    "run": "docker run -d -p 4000:3000 --name container-ip ip-node-app",
+    "curl": "curl localhost:4000",
+    "lint": "npx eslint ./src",
+    "ad-list": "node --loader ts-node/esm old-style-code/scrapping/ad-list-cheerio.test.ts",
+    "oneAds": "node --loader ts-node/esm old-style-code/scrapping/oneAds.test.ts",
+    "oneAds-many": "node --loader ts-node/esm old-style-code/scrapping/old/oneAdsMany.test.ts1",
+    "server-socket2": "ts-node src/net-socket/test/server-socket.test.ts",
+    "type-check": "tsc -noEmit"
+  },
+  "keywords": [],
+  "author": "Gayrat Vlasov",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^18.11.10",
+    "@typescript-eslint/eslint-plugin": "^5.45.0",
+    "@typescript-eslint/parser": "^5.45.0",
+    "eslint": "^8.29.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-prettier": "^4.2.1",
+    "prettier": "^2.8.0",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.1.2",
+    "typescript": "^4.9.5"
+  },
+  "dependencies": {
+  }
+}
