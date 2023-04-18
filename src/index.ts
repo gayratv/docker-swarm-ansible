@@ -13,7 +13,7 @@ app.get('/set', async (request, response) => {
 });
 app.get('/get', (request, response) => {
   const res = readFileSync('./data/req');
-  response.send(res.toString());
+  response.send(res.toString() + '\n');
 });
 app.listen(port, () => {
   console.log(`server is listening on ${port}`);
