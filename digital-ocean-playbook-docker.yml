@@ -1,13 +1,16 @@
 ---
+# hosts declares which servers the Ansible control node will target with this playbook
 - hosts: all
   become: true
   vars:
     container_count: 4
     default_container_name: docker
     default_container_image: ubuntu
+#    Default command to run on new containers.
     default_container_command: sleep 1d
 
   tasks:
+#    Install aptitude, which is preferred by Ansible as an alternative to the apt package manager.
     - name: Install aptitude
       apt:
         name: aptitude
@@ -24,6 +27,8 @@
           - python3-pip
           - virtualenv
           - python3-setuptools
+#          из документации Docker
+          - gnupg
         state: latest
         update_cache: true
 
@@ -34,6 +39,8 @@
 
     - name: Add Docker Repository
       apt_repository:
+# Эта запись только для версии 22.04
+#        Ubuntu Jammy 22.04 (LTS)
         repo: deb https://download.docker.com/linux/ubuntu jammy stable
         state: present
 

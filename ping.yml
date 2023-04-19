@@ -1,0 +1,46 @@
+---
+- name: Ping test
+  hosts: manager
+  tasks:
+    - name: Ping host
+      ping:
+
+#    - name: Display ansible_facts
+#      debug:
+#        var: "ansible_facts"
+    - name: Display ansible_facts architecture
+      debug:
+        var: "ansible_facts.architecture"
+    - name: Display ansible_facts default_ipv4
+      debug:
+        var: "ansible_facts.default_ipv4"
+    - name: Display ansible_distribution_release
+      debug:
+        var: "ansible_facts.ansible_distribution_release"
+    - name: Display distribution_version
+      debug:
+        var: "ansible_facts.distribution_version"
+    - name: Display distribution_release
+      debug:
+        var: "ansible_facts.distribution_release"
+
+    - name: Display distribution_release2
+      debug:
+#        "VARIABLE IS NOT DEFINED!"
+        var: "distribution_release"
+#    - name: Copy value of var1 to var2
+#      set_fact:
+#        ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
+
+    - name: Display ansible_distribution_release2
+      debug:
+        var: "ansible_distribution_release"
+
+
+#"distribution": "Ubuntu",
+#"distribution_file_parsed": true,
+#"distribution_file_path": "/etc/os-release",
+#"distribution_file_variety": "Debian",
+#"distribution_major_version": "22",
+#"distribution_release": "jammy",
+#"distribution_version": "22.04",

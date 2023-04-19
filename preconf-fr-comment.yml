@@ -1,0 +1,48 @@
+# файл из коментария
+# https://learn.purpleschool.ru/student/courses/c248cd0b-625d-4a40-a39d-2418e70d4fef/lessons/245f41a6-ec42-4d57-a57d-d20b16a8fc8f
+- name: Preconfig
+  hosts: demo
+  tasks:
+  - name: Установка Docker
+    become: true
+    block:
+     - name: Добавляем universe
+       ansible.builtin.apt_repositony:
+            repo: "deb http://ports.ubuntu.com/ubuntu-ports/{{ ansible_distribution_release }} universe"
+            state: present
+     - name: Установка дополнительных пакетов
+       ansible.builtin.apt:
+            name :
+                - ca-certificates
+                - curl
+#                software for encryption and digital signature operations.
+                - gnupg
+            update_cache: true
+            cache_vaid_time: 86400
+     - name: Добавление ключа Docker
+       ansible.builtin.apt_key:
+            url: https://download.docker.com/linux/ubuntu/gpg
+            keyring: /etc/apt/keyrings/docker.gpg
+     - name: Установка стабильного репозитария
+       ansible.builtin.apt_repository:
+            repo: "deb [arch=arm64 signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu/{{ ansible_distribution_release }} stable"
+            state: present
+            update_cache: true
+            filename: docker
+     - name: Установка Docker-ce
+       ansible.builtin.apt:
+            name: docker-ce
+            update_cache: true
+     - name: Проверка что Docker установлен и перезагружен
+       ansible.builtin.service:
+            name: docker
+            state: restarted
+            enabled: true
+     - name: Завершение установки
+       become: true
+       block:
+            - name: Добавить пользователя в группу Docker
+              ansible.builtin.user:
+                    name: "{{ ansible_user }}"
+                    groups: docker
+                    append: true

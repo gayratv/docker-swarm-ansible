@@ -1,0 +1,5 @@
+---
+# variables for group all
+all:
+  vars:
+    ansible_distribution_release: "{{ ansible_facts.distribution_release }}"

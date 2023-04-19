@@ -1,0 +1,27 @@
+- name: Example Playbook
+  hosts: localhost
+#  gather_facts: no
+  tasks:
+   - name: Display Hello World
+     debug:
+       var: "msg"
+     vars:
+       msg: "Hello World"
+#   - name: Debug
+#     debug:
+#       var: "ansible_distribution_release"
+#       var: "ansible.builtin.setup"
+#   - name: Print all available facts
+#     ansible.builtin.debug:
+#       var: ansible_facts
+   - name: Display ansible_facts
+     debug:
+        var: "ansible_facts.architecture"
+   - name: Display ansible_facts2
+     debug:
+        var: "ansible_facts.default_ipv4"
+   - name: Display ansible_facts2
+     debug:
+        var: "ansible_facts.ansible_distribution_release"
+#        var: "ansible_inventory_sources"
+#        var: "ansible_play_hosts_all"
