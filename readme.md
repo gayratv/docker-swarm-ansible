@@ -24,6 +24,35 @@ DIGITAL OCEAN
 How to Use Ansible to Install and Set Up Docker on Ubuntu 22.04
 https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-and-set-up-docker-on-ubuntu-22-04
 
+## Install Docker Engine on Ubuntu
+https://docs.docker.com/engine/install/ubuntu/
+
+buntu Kinetic 22.10
+Ubuntu Jammy 22.04 (LTS)
+Ubuntu Focal 20.04 (LTS)
+Ubuntu Bionic 18.04 (LTS)
+
+## How to Deploy Docker Swarm on Ubuntu 22.04 Step-by-Step
+https://www.linuxtechi.com/how-to-deploy-docker-swarm-on-ubuntu/?utm_content=cmp-true
+
+2. Install Docker CE on all the nodes
+3. Once Docker is installed, add the currently logged-in user to the Docker group to avoid running Docker as a sudo user every time you run Docker.
+
+$ sudo usermod -aG docker ${USER}
+$ newgrp docker
+
+Step 3) Verify Docker is running on all the nodes
+sudo systemctl status docker
+
+Step 4) Create Docker Swarm Cluster
+$ sudo docker swarm init --advertise-addr 10.128.0.57
+$ sudo docker swarm join --token SWMTKN-1-1k397 10.128.0.57:2377
+sudo docker node ls
+
+
+## Интересная реализация role docker
+https://github.com/geerlingguy/ansible-role-docker/blob/master/tasks/main.yml
+
 
 Обзор inventory
 ansible-inventory -i inventory --list -y
