@@ -1,5 +1,12 @@
 ---
 # variables for group all
-all:
-  vars:
-    ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
+# all:
+#  vars:
+#    ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
+distribution_name_g: "{{ ansible_facts.distribution_release }}"
+#   "ubuntu_release": "jammy"
+ubuntu_release: "{{ ansible_facts.distribution_release }}"
+#  количество ядер в системе
+vcpus: "{{ ansible_facts.processor_vcpus }}"
+# "22.04"
+distribution_version_g: "{{ ansible_facts.distribution_version }}"

@@ -1,0 +1,12 @@
+---
+- hosts: all
+  roles:
+    - role: ping
+    - role: test_role
+      message1: "test_role FINISH"
+
+#    - role: webserver
+#      Here, we override the default variable nginx_version with another version.
+#      vars:
+#        nginx_version: 1.17.10-0ubuntu1
+#      tags: example_tag

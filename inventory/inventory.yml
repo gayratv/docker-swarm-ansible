@@ -3,7 +3,7 @@ all:
   children:
     manager:
       hosts:
-        62.113.104.26:
+        62.113.105.228:
     worker:
       hosts:
         54.167.139.56:

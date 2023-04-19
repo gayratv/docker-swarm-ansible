@@ -28,4 +28,36 @@ https://www.digitalocean.com/community/tutorials/how-to-use-ansible-to-install-a
 Обзор inventory
 ansible-inventory -i inventory --list -y
 
+-# manager - группа хостов
+ansible -i inventory manager -m ping
+
+// Any command that you would normally execute on a remote server over SSH can be run with Ansible on the servers specified in your inventory file. As an example, you can check disk usage on all servers with:
+
+ansible -i inventory manager -a "df -h" -u root
+
+// You can also execute Ansible modules via ad-hoc commands, similarly to what we’ve done before with the ping module for testing connection. For example, here’s how we can use the apt module to install the latest version of vim on all the servers in your inventory:
+
+ansible -i inventory manager -m apt -a "name=vim state=latest"
+
+// you would check the uptime of every host in the servers group:
+
+ansible -i inventory manager -a "uptime" 
+
+ansible-playbook -i inventory ping.yml --limit manager
 ansible-playbook -i inventory ping.yml
+
+# init role
+ansible-galaxy init roles/preconfig-do
+
+репозитарий с примером webserver
+https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/ansible-roles
+
+статья
+https://spacelift.io/blog/ansible-roles
+
+// ограничить только хостами manager
+ansible-playbook -i inventory ping-role.yml --limit manager
+
+ansible-playbook -i inventory ping-role.yml --list-hosts
+
+ansible-playbook -i inventory preconfig-do-role.yml --limit manager

@@ -1,6 +1,7 @@
 ---
 - name: Ping test
-  hosts: manager
+#  hosts: manager
+  hosts: all
   tasks:
     - name: Ping host
       ping:
@@ -36,6 +37,26 @@
       debug:
         var: "ansible_distribution_release"
 
+    - name: Display ubuntu_release
+      debug:
+        var: "ubuntu_release"
+
+#    - name: Display processor_vcpus
+#      debug:
+#        var: "ansible_facts.processor_vcpus"
+#
+#    - name: Display processor_cores
+#      debug:
+#        var: "ansible_facts.processor_cores"
+#
+#    - name: Display ubuntu_release
+#      debug:
+#        var: "ansible_facts.processor_count"
+
+    - name: Display all
+      debug:
+        msg: "count : {{ ansible_facts.processor_count }} cores: {{ ansible_facts.processor_cores }} vcpu:{{ ansible_facts.processor_vcpus }}"
+
 
 #"distribution": "Ubuntu",
 #"distribution_file_parsed": true,
@@ -44,3 +65,7 @@
 #"distribution_major_version": "22",
 #"distribution_release": "jammy",
 #"distribution_version": "22.04",
+
+#"processor_vcpus": 1,
+#  "processor_cores": 1,
+#    "processor_count": 1,
