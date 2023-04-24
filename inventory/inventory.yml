@@ -3,12 +3,13 @@ all:
   children:
     manager:
       hosts:
-        62.113.105.228:
+        45.67.56.101:
     worker:
       hosts:
         54.167.139.56:
   vars:
-    ansible_user: root
+#    ansible_user: root
+    ansible_user: docker
     ansible_connection: ssh
     ansible_ssh_private_key_file: "~/.ssh/ansible/id_rsa.priv"
     ansible_ssh_common_args: "-o StrictHostKeyChecking=no"

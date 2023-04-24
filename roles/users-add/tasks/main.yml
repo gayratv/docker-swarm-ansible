@@ -1,0 +1,32 @@
+---
+- name: Create new user and group
+  block:
+    - name: Create the group
+      group:
+         name: "{{ new_user_group }}"
+         state: present
+    - name: Add the user "{{ create_new_user_name_to_add }}"
+      ansible.builtin.user:
+        name: "{{ create_new_user_name_to_add }}"
+        shell: /bin/bash
+        groups: "{{ new_user_group }}, sudo"
+        password: "{{ upassword | password_hash('sha512') }}"
+        append: yes
+
+    - name: Set authorized key taken from file
+      ansible.posix.authorized_key:
+        user: "{{ create_new_user_name_to_add }}"
+        state: present
+        key: "{{ lookup('file', 'files/id_rsa.pub') }}"
+
+    - name: Allow user to run any command with sudo without password prompt
+      lineinfile:
+              path: /etc/sudoers.d/allow_user
+              line: '{{ create_new_user_name_to_add }} ALL=(ALL) NOPASSWD: ALL'
+              create: yes
+              state: present
+              mode: '0440'
+
+
+  become: true
+

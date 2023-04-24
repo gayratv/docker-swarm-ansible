@@ -1,4 +1,7 @@
 ---
+- name: Display ansible_facts
+  debug:
+    var: "ansible_facts"
 - name: Display ansible_facts architecture
   debug:
     msg: "ALL INFO {{ distribution_name_g }} {{ distribution_version_g }} {{ ubuntu_release }} | VCPU count: {{ vcpus }}"

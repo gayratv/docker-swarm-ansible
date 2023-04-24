@@ -1,0 +1,3 @@
+---
+# defaults file for roles/docker-registry-install
+registry_port: 5000

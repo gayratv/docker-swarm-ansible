@@ -1,0 +1,7 @@
+---
+- hosts: manager
+  roles:
+    - roles/git-clone
+#  vars:
+#    git_repository_name: "a22"
+#    git_repository_url: "https://github.com/gayratv/vue3-vuex4-typescript"

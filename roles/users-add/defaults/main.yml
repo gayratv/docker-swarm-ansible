@@ -1,0 +1,5 @@
+---
+create_new_user_name_to_add: docker
+# root,docker
+new_user_group: docker
+upassword: "123"

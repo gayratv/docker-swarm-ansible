@@ -10,3 +10,23 @@ ubuntu_release: "{{ ansible_facts.distribution_release }}"
 vcpus: "{{ ansible_facts.processor_vcpus }}"
 # "22.04"
 distribution_version_g: "{{ ansible_facts.distribution_version }}"
+
+rmq_defaults:
+  - name: AMQP_EXCHANGE
+    value: xchg_integrations
+  - name: AMQP_USER
+    value: "{{rmq.user}}"
+  - name: AMQP_PASSWORD
+    value: "{{rmq.password}}"
+  - name: AMQP_HOSTNAME
+    value: rmq
+
+
+# defaults for roles/git-clone
+git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
+git_repository_name: "alari-code-docker-show-ip"
+git_repository_destination_dir: "/git-repos1/{{ git_repository_name  }}"
+#git_repository_version: "v1.0.1"
+git_repository_version: "latest"
+# имя итогового image
+docker_image_name: "localhost:5000/{{ git_repository_name }}:{{ git_repository_version  }}"
