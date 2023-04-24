@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: manager
   roles:
     - role: ping
     - role: test_role

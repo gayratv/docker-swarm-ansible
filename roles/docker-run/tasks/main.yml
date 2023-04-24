@@ -1,0 +1,9 @@
+---
+# tasks file for roles/docker-build
+- name: Run Docker container
+  docker_container:
+      name: "{{ git_repository_name }}"
+      image: "{{ docker_image_name }}"
+      state: started
+      ports:
+        - "3000:3000"

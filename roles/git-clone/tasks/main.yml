@@ -1,0 +1,21 @@
+---
+# tasks file for roles/git-clone
+#  and the destination directory must be empty.
+- name: Delete target directory if it exists
+  file:
+      path: "{{ git_repository_destination_dir }}"
+      state: absent
+#      ignore_errors:
+- name: Create target directory
+  file:
+      path: "{{ git_repository_destination_dir }}"
+      owner: docker
+      state: directory
+  become: true
+
+- name: Clone Git repository
+  git:
+    repo: "{{ git_repository_url }}"
+    dest: "{{ git_repository_destination_dir }}"
+    single_branch: yes
+    version: master

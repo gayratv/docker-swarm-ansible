@@ -87,6 +87,20 @@ https://spacelift.io/blog/ansible-roles
 // ограничить только хостами manager
 ansible-playbook -i inventory ping-role.yml --limit manager
 
+
 ansible-playbook -i inventory ping-role.yml --list-hosts
 
 ansible-playbook -i inventory preconfig-do-role.yml --limit manager
+
+# Пользователь
+ansible.posix.authorized_key module
+https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key_module.html#examples
+
+### git-clone test
+ansible-playbook -i inventory roles/git-clone/tests/test.yml
+
+### docker build
+ansible-playbook -i inventory docker-build-role.yml
+
+результат - image:
+localhost:5000/alari-code-docker-show-ip   v1

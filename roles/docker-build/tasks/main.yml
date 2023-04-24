@@ -1,0 +1,11 @@
+---
+# tasks file for roles/docker-build
+- name: Build an image and push it to a private repo
+  community.docker.docker_image:
+    build:
+      path: "{{ git_repository_destination_dir }}"
+#      Specify the registry as part of the name or repository parameter.
+    name: "localhost:5000/{{ git_repository_name }}"
+    tag: "{{ git_repository_version }}"
+    push: true
+    source: build
