@@ -6,9 +6,9 @@
     - name: Ping host
       ping:
 
-#    - name: Display ansible_facts
-#      debug:
-#        var: "ansible_facts"
+    - name: Display ansible_facts
+      debug:
+        var: "ansible_facts"
 
     - name: Display ansible_facts default_ipv4
       debug:
@@ -35,13 +35,6 @@
     - name: Display interfaces
       debug:
         var: "ansible_facts.interfaces"
-
-
-
-#    - name: Copy value of var1 to var2
-#      set_fact:
-#        ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
-
 
 
 

@@ -157,7 +157,7 @@ For external facing ingress connnetiion, service routing works this way,
 
 ingress ==> gwbridge ==> ingress-sbox (its just a n/w namespae not a container) ==> ipvs ==> underlay
 
-### созать overlay network my-overlay-network
+### создать overlay network my-overlay-network
 docker network create --driver overlay --subnet 10.10.10.0/24 my-overlay-network
 
 

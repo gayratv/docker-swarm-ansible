@@ -1,0 +1,5 @@
+---
+- hosts: worker
+  roles:
+    - role: roles/swarm_join
+      type: worker

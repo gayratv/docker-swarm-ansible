@@ -17,8 +17,9 @@ docker pull ubuntu
 docker tag ubuntu localhost:5000/ubuntu
 docker push localhost:5000/ubuntu
 
+--flush-cache clear the fact cache for every host in inventory
 
-ansible-playbook -i inventory all.yml
+ansible-playbook --flush-cache -i inventory all.yml
 
 ansible-playbook -i inventory all-swarm.yml 
 

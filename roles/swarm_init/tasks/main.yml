@@ -1,4 +1,7 @@
 ---
+#- name: Clear cached facts
+#  ansible_cache_plugin:
+#    clear: true
 - name: Инициализация swarm
   community.docker.docker_swarm:
     state: present
@@ -12,5 +15,6 @@
   set_fact:
     token_manager: "{{ token.swarm_facts.JoinTokens.Manager }}"
     token_worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
+    master_ip4_beget_private_network:   "{{ ansible_facts.eth1.ipv4.address }}"
     cacheable: true
     ansible_fact_caching: true
