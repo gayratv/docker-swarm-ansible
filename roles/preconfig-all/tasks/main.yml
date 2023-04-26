@@ -64,27 +64,7 @@
         state: restarted
         enabled: true
 
-    #     docker-ce - comunity edition
-#    полная инсталяцию из документации:
-#          sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-#
-#    не включены пакеты
-#    docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-    - name: Установка Docker-compose
-      block:
-        - name: Получение последней версии Docker-compose
-          uri:
-            url: https://api.github.com/repos/docker/compose/releases/latest
-            body_format: json
-          register: page
-
-        - name: Установка Docker-compose
-          get_url:
-            url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-Linux-x86_64"
-            dest: /usr/local/bin/docker-compose
-            mode: 0755
-      become: true
 
     - name: Install Docker Module for Python
       pip:
@@ -92,29 +72,7 @@
 
     - name: Завершение установки
       block:
-#        - name: Добавление пользователя в группу Docker
-#          user:
-#            name: "{{ ansible_user }}"
-#            groups: docker
-#            append: true
-
         - name: Перезагрузка
           reboot:
 
   become: true
-
-
-
-#
-#    - name: Pull default Docker image
-#      community.docker.docker_image:
-#        name: "{{ default_container_image }}"
-#        source: pull
-#
-#    - name: Create default containers
-#      community.docker.docker_container:
-#        name: "{{ default_container_name }}{{ item }}"
-#        image: "{{ default_container_image }}"
-#        command: "{{ default_container_command }}"
-#        state: present
-#      with_sequence: count={{ container_count }}

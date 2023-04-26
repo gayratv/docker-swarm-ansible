@@ -3,10 +3,14 @@ all:
   children:
     manager:
       hosts:
-        45.67.56.101:
+        master:
+          ansible_host: 45.67.56.67
     worker:
       hosts:
-        54.167.139.56:
+        ans2:
+            ansible_host: 45.67.59.9
+        ans3:
+            ansible_host: 45.67.59.81
   vars:
 #    ansible_user: root
     ansible_user: docker

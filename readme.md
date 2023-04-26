@@ -72,7 +72,7 @@ ansible -i inventory manager -m apt -a "name=vim state=latest"
 
 ansible -i inventory manager -a "uptime" 
 
-ansible-playbook -i inventory ping.yml --limit manager
+ansible-playbook -i inventory ping.yml --limit manager -e "ansible_user=root"
 ansible-playbook -i inventory ping.yml
 
 # init role
@@ -99,8 +99,109 @@ https://docs.ansible.com/ansible/latest/collections/ansible/posix/authorized_key
 ### git-clone test
 ansible-playbook -i inventory roles/git-clone/tests/test.yml
 
+
 ### docker build
 ansible-playbook -i inventory docker-build-role.yml
 
+ansible-playbook -vvv -i inventory roles/docker-build/tests/test.yml
+
+### swarm init
+ansible-playbook -i inventory roles/swarm_init/tests/test.yml
+ansible-playbook -i inventory swarm-init-show-token.yml
+
+export ANSIBLE_CONFIG=~/ansible/ansible.cfg
+ansible --version | grep "config file"
+
+export ANSIBLE_CONFIG=~/ansible/ansible.cfg && ansible-playbook -i inventory swarm_init_role_test.yml 
+
+#### создание сети ingres
+ansible-playbook -i inventory docker-network-create-ingress.yml
+
 результат - image:
 localhost:5000/alari-code-docker-show-ip   v1
+
+
+ansible-playbook -i inventory ping.yml --limit manager -e "ansible_user=root"
+
+
+## Ansible работа с кешированными фактами
+
+Испытал трудности с кешированием факта под windows /wsl
+(нужно для Swarm Join)
+
+решение:
+1. создайте директорию ~/ansible
+2. положите туда файл ansible.cfg
+
+с таким содержимым
+[defaults]
+fact_caching = jsonfile
+fact_caching_connection = ~/ansible/cache
+
+3. создайте директорию ~/ansible/cache
+4. перед запуском дайте команду
+
+export ANSIBLE_CONFIG=~/ansible/ansible.cfg
+
+Либо для верности скомбинируйте ее:
+
+export ANSIBLE_CONFIG=~/ansible/ansible.cfg && ansible-playbook -i inventory swarm_init_role_test.yml
+
+После этого в директории ~/ansible/cache у Вас появится файл с кешем
+
+# Docker ingress сеть
+
+создается автоматически при инициализации docker swarm
+
+For external facing ingress connnetiion, service routing works this way,
+
+ingress ==> gwbridge ==> ingress-sbox (its just a n/w namespae not a container) ==> ipvs ==> underlay
+
+### созать overlay network my-overlay-network
+docker network create --driver overlay --subnet 10.10.10.0/24 my-overlay-network
+
+
+docker network inspect ingress | grep Subnet
+"Subnet": "10.255.0.0/16",
+docker network inspect docker_gwbridge | grep Subnet
+"Subnet": "172.19.0.0/16",
+
+
+I can get the overlay IP address for each container by executing ifconfig eth2
+
+docker exec 2b0abe2956c6 ifconfig eth2 | grep addr
+
+eth2      Link encap:Ethernet  HWaddr 02:42:0a:0a:0a:05
+**inet addr**:10.10.10.5  Bcast:0.0.0.0  Mask:255.255.255.0
+inet6 addr: fe80::42:aff:fe0a:a05/64 Scope:Link
+
+Если контейнер подключен к owerlay сети на другой машине - то можно просто дать ping на другой хост
+$ docker exec a1ca9a0d2364 ping 10.10.10.5
+
+https://www.securitynik.com/2016/12/docker-networking-internals-container.html
+
+### Ingress
+Второй сетью, к которой подключены контейнеры, была сеть ingress. Ingress - это оверлейная сеть, но она устанавливается по умолчанию после запуска кластера swarm. Эта сеть используется для обеспечения связи при подключении к контейнерам из внешнего мира. В ней также происходит балансировка нагрузки, обеспечиваемая кластером swarm.
+
+Балансировка нагрузки обрабатывается IPVS, который работает на контейнере, запускаемом docker swarm по умолчанию. Мы видим этот контейнер, подключенный к входящей сети (я использовал тот же веб-сервис, что и раньше, который открывает порт 8080, который затем сопоставляется с портом 80 на контейнерах):
+
+docker service create --name webapp --replicas=3 --network my-overlay-network -p 8080:80
+
+$ docker network inspect ingress
+
+"ingress-sbox": {
+"Name": "ingress-endpoint",
+
+
+$ sudo iptables -t nat -n -L
+Chain DOCKER-INGRESS (2 references)
+tcp dpt:8080 to:172.19.0.2:8080
+
+Вы видите правило, которое соответствует трафику, предназначенному для порта 8080, и перенаправляет его на 172.19.0.2. Мы видим, что 172.19.0.2 принадлежит контейнеру ingress-sbox, если проверим его интерфейсы:
+
+Затем docker использует правила iptables mangle для маркировки пакетов на порт 8080 определенным номером, который затем будет использоваться IPVS для балансировки нагрузки на соответствующие контейнеры:
+
+## Traefik обратный proxy для docker swarm
+https://dockerswarm.rocks/traefik/
+
+https://docs.docker.com/engine/swarm/networking/

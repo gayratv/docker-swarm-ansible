@@ -1,5 +1,5 @@
 ---
 # defaults file for roles/git-clone
-git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
-git_repository_name: "AlariCode-docker-show-ip"
-git_repository_destination_dir: "/git-repos1/{{ git_repository_name  }}"
+#git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
+#git_repository_name: "AlariCode-docker-show-ip"
+#git_repository_destination_dir: "/git-repos1/{{ git_repository_name  }}"

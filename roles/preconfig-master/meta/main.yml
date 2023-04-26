@@ -1,6 +1,6 @@
 galaxy_info:
   author: Gayrat
-  description: Git clone
+  description: preconfig Digital Ocean
   license: MIT
 
   min_ansible_version: 2.13
@@ -8,8 +8,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
 #        - all
-        - jammy
-
+        - 22.04
 
   galaxy_tags: []
     # List tags for your role here, one per line. A tag is a keyword that describes

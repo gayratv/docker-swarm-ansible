@@ -1,0 +1,12 @@
+---
+- name: Создание сети
+  hosts: manager
+  tasks:
+#   - community.docker.docker_network:
+#        name: "{{ network_name }}"
+#        driver: overlay
+#        scope: swarm
+#        ingress: true
+
+   - name: Create Docker network
+     command: "docker network create --driver overlay --ingress --subnet=10.16.0.0/16 {{ network_name }}"

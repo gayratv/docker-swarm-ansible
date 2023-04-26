@@ -1,0 +1,25 @@
+---
+- name: DO
+  block:
+    - name: Установка Docker-compose
+      block:
+        - name: Получение последней версии Docker-compose
+          uri:
+            url: https://api.github.com/repos/docker/compose/releases/latest
+            body_format: json
+          register: page
+
+        - name: Установка Docker-compose
+          get_url:
+            url: "https://github.com/docker/compose/releases/download/{{ page.json.tag_name }}/docker-compose-Linux-x86_64"
+            dest: /usr/local/bin/docker-compose
+            mode: 0755
+      become: true
+
+
+    - name: Завершение установки
+      block:
+        - name: Перезагрузка
+          reboot:
+
+  become: true

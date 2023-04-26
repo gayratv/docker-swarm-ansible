@@ -1,3 +1,4 @@
 collections:
   - name: community.docker
   - name: ansible.posix.authorized_key
+  - name: community.docker

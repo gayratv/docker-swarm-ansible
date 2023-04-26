@@ -1,0 +1,11 @@
+---
+- name: Подключение
+  community.docker.docker_swarm:
+    state: join
+    remote_addrs: "{{ ansible_facts.eth1.ipv4.address }}"
+    join_token: >
+      {{
+        hostvars['master']['ansible_facts']['token_worker']
+        if type == 'worker' else
+        hostvars['master']['ansible_facts']['token_manager']
+      }}

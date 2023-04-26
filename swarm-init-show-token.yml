@@ -1,0 +1,9 @@
+---
+- name: Swarm show
+  #  hosts: manager
+  hosts: manager
+#  gather_facts: no
+  tasks:
+    - name: Display token_manager
+      debug:
+        var: "hostvars['master']['ansible_facts']['token_worker']"

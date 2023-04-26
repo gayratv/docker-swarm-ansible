@@ -9,63 +9,44 @@
 #    - name: Display ansible_facts
 #      debug:
 #        var: "ansible_facts"
-    - name: Display ansible_facts architecture
-      debug:
-        var: "ansible_facts.architecture"
+
     - name: Display ansible_facts default_ipv4
       debug:
         var: "ansible_facts.default_ipv4"
-    - name: Display ansible_distribution_release
-      debug:
-        var: "ansible_facts.ansible_distribution_release"
-    - name: Display distribution_version
+
+    - name: Display ansible_facts.distribution_version
       debug:
         var: "ansible_facts.distribution_version"
-    - name: Display distribution_release
-      debug:
-        var: "ansible_facts.distribution_release"
-
-    - name: Display distribution_release2
-      debug:
-#        "VARIABLE IS NOT DEFINED!"
-        var: "distribution_release"
-#    - name: Copy value of var1 to var2
-#      set_fact:
-#        ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
-
-    - name: Display ansible_distribution_release2
-      debug:
-        var: "ansible_distribution_release"
-
     - name: Display ubuntu_release
       debug:
         var: "ubuntu_release"
 
-#    - name: Display processor_vcpus
-#      debug:
-#        var: "ansible_facts.processor_vcpus"
-#
-#    - name: Display processor_cores
-#      debug:
-#        var: "ansible_facts.processor_cores"
-#
-#    - name: Display ubuntu_release
-#      debug:
-#        var: "ansible_facts.processor_count"
+    - name: Display ansible_facts.distribution_release
+      debug:
+        var: "ansible_facts.distribution_release"
+    - name: Display ansible_distribution_release
+      debug:
+        var: "ansible_distribution_release"
+
+    - name: Display all_ipv4_addresses
+      debug:
+        var: "ansible_facts.all_ipv4_addresses"
+
+    - name: Display interfaces
+      debug:
+        var: "ansible_facts.interfaces"
+
+
+
+#    - name: Copy value of var1 to var2
+#      set_fact:
+#        ansible_distribution_release: "{{ ansible_facts.distribution_release }}"
+
+
+
 
     - name: Display all
       debug:
-        msg: "count : {{ ansible_facts.processor_count }} cores: {{ ansible_facts.processor_cores }} vcpu:{{ ansible_facts.processor_vcpus }}"
+        msg: "processor_count : {{ ansible_facts.processor_count }} processor_cores: {{ ansible_facts.processor_cores }} processor_vcpus:{{ ansible_facts.processor_vcpus }}"
 
 
-#"distribution": "Ubuntu",
-#"distribution_file_parsed": true,
-#"distribution_file_path": "/etc/os-release",
-#"distribution_file_variety": "Debian",
-#"distribution_major_version": "22",
-#"distribution_release": "jammy",
-#"distribution_version": "22.04",
-
-#"processor_vcpus": 1,
-#  "processor_cores": 1,
-#    "processor_count": 1,

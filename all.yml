@@ -1,0 +1,13 @@
+---
+- hosts: all
+  roles:
+   - role: users-add
+     vars:
+       ansible_user: root
+   - preconfig-all
+
+# 02 Сделать преконфиг для хостов manager
+- hosts: manager
+  roles:
+    - preconfig-master
+    - docker-registry-install

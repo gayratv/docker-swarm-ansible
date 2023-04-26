@@ -1,0 +1,24 @@
+---
+argument_specs:
+  # roles main.yml entry point
+  main:
+    short_description: Git clone argumnents
+    options:
+      git_repository_name:
+        type: "str"
+        required: true
+#        default: "AlariCode-docker-show-ip"
+        description: "The string value"
+
+      git_repository_destination_dir:
+        type: "str"
+        required: true
+#        default: "/git-repos/{{ git_repository_name  }}"
+        description: "The string value"
+
+      git_repository_version:
+        type: "str"
+        required: true
+#        default: "latest"
+        description: "The string value"
+
