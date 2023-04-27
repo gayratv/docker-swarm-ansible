@@ -43,6 +43,19 @@ ansible-playbook -i inventory roles/swarm_join_worker/tests/test.yml
 
 ansible-playbook -i inventory swarm_join_test.yml
 
+docker swarm join-token worker
+
+docker swarm join --token SWMTKN-1-00s618mr0cfquy7j5x9or8e8o9p9t5ws17hyx20s2gegup0vw2-bdg69xggh3gunl6asec2r5r8a 10.16.0.2
+
+
+
+
+ansible-playbook --flush-cache -i inventory all.yml
+
+ansible-playbook --flush-cache -i inventory all.yml --tags swarm_init
+
+ansible-playbook -i inventory all.yml --tags swarm_join
+
 
 
 

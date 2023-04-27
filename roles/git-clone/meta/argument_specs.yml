@@ -7,18 +7,18 @@ argument_specs:
       git_repository_url:
         type: "str"
         required: true
-        default: "https://github.com/gayratv/AlariCode-docker-show-ip"
+#        default: "https://github.com/gayratv/AlariCode-docker-show-ip"
         description: "link to github repo"
 
       git_repository_name:
         type: "str"
         required: true
-        default: "AlariCode-docker-show-ip"
+#        default: "AlariCode-docker-show-ip"
         description: "The string value"
 
       git_repository_destination_dir:
         type: "str"
         required: true
-        default: "/git-repos/{{ git_repository_name  }}"
+#        default: "/git-repos/{{ git_repository_name  }}"
         description: "The string value"
 

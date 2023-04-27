@@ -1,8 +1,14 @@
 ---
 - hosts: manager
+  tasks:
+    - name: Create dir /git-repos1/
+      file:
+        path: /git-repos2
+        state: directory
+      become: true
   roles:
     - role: roles/git-clone
       vars:
         git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
-        git_repository_name: "alariCode-docker-show-ip"
-        git_repository_destination_dir: "/git-repos1/{{ git_repository_name  }}"
+        git_repository_name: "docker-show-ip"
+        git_repository_destination_dir: "/git-repos2/{{ git_repository_name  }}"

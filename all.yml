@@ -11,9 +11,11 @@
   roles:
     - preconfig-master
     - docker-registry-install
-    - swarm_init
+    - role: swarm_init
+      tags: swarm_init
 
 - hosts: worker
   roles:
     - role: swarm_join
       type: worker
+      tags: swarm_join

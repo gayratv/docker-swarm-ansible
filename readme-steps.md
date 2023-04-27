@@ -20,6 +20,12 @@ docker push localhost:5000/ubuntu
 --flush-cache clear the fact cache for every host in inventory
 
 ansible-playbook --flush-cache -i inventory all.yml
+ansible-playbook -i inventory swarm_join_test.yml
 
-ansible-playbook -i inventory all-swarm.yml 
+
+ansible-playbook --flush-cache -i inventory all.yml --tags swarm_init
+
+ansible-playbook -i inventory all.yml --tags swarm_join
+
+////ansible-playbook -i inventory all-swarm.yml 
 

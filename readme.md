@@ -104,6 +104,7 @@ ansible-playbook -i inventory roles/git-clone/tests/test.yml
 ansible-playbook -i inventory docker-build-role.yml
 
 ansible-playbook -vvv -i inventory roles/docker-build/tests/test.yml
+ansible-playbook -i inventory roles/docker-build/tests/test.yml
 
 ### swarm init
 ansible-playbook -i inventory roles/swarm_init/tests/test.yml
