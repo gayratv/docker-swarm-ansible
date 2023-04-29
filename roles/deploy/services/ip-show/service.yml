@@ -1,7 +1,4 @@
 ---
-- name: "[{{ name }}] Конфигурация секрета"
-  include: "../secret.yml"
-
 - name: "[{{ name }}] Выкладка сервиса"
   block:
     - name: "[{{ name }}] Выкладываем сервис"
@@ -15,9 +12,16 @@
         publish:
           - mode: ingress
             protocol: tcp
-            published_port: 3002
+            published_port: 3000
             target_port: 3000
-        secrets:
-          - secret_name: "{{ name }}.env"
-            filename: "/opt/app/.env"
+        placement:
+#          preferences:
+#            - spread: node.labels.mylabel
+#          constraints:
+#            - node.role == manager
+#            - engine.labels.operatingsystem == ubuntu 14.04
+          replicas_max_per_node: 1
+        replicas: 3
+        env:
+          PORT_PARAM2: "8000"
   tags: "{{ name }}"

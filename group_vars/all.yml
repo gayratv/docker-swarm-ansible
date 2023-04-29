@@ -36,3 +36,10 @@ git_repository_base_dir: "/git-repos2/"
 #git_repository_version: "latest"
 ## имя итогового image
 #docker_image_name: "localhost:5000/{{ git_repository_name }}:{{ git_repository_version  }}"
+
+
+services:
+  - name: ip-show
+    version: latest
+#  - name: nginx
+#    version: latest
