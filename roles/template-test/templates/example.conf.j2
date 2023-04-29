@@ -1,0 +1,11 @@
+# Example configuration file
+server_name: {{ server_name }};
+server_port: {{ server_port }};
+master_node: {{ master_node_ip }}
+
+
+sudo nano /etc/docker/config.yml
+
+{
+"insecure-registries" : ["{{ master_node_ip }}:5000"]
+}

@@ -16,12 +16,17 @@ docker pull localhost:5000/hello-world
 openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt
 
 sudo nano /etc/docker/config.yml
+sudo nano /etc/docker/daemon.json
 
 {
 "insecure-registries" : ["10.16.0.2:5000"]
 }
 
 sudo systemctl restart docker
+docker info
+
+# Выписать сертификат
+https://docs.docker.com/registry/insecure/
 
 cd ~
 openssl req -newkey rsa:4096 -nodes -sha256 -keyout domain.key -x509 -days 365 -out domain.crt

@@ -16,6 +16,12 @@ argument_specs:
 #        default: "AlariCode-docker-show-ip"
         description: "The string value"
 
+      git_repository_base_dir:
+        type: "str"
+        required: true
+        #        default: "/git-repos2/"
+        description: "The string value"
+
       git_repository_destination_dir:
         type: "str"
         required: true

@@ -18,3 +18,4 @@
     master_ip4_beget_private_network:   "{{ ansible_facts.eth1.ipv4.address }}"
     cacheable: true
     ansible_fact_caching: true
+

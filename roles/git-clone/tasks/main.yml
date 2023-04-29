@@ -1,11 +1,17 @@
 ---
 # tasks file for roles/git-clone
+- name: "Create dir {{ git_repository_base_dir }}"
+  file:
+      path: "{{ git_repository_base_dir }}"
+      state: directory
+  become: true
 #  and the destination directory must be empty.
 - name: Delete target directory if it exists
   file:
       path: "{{ git_repository_destination_dir }}"
       state: absent
 #      ignore_errors:
+  become: true
 - name: Create target directory
   file:
       path: "{{ git_repository_destination_dir }}"

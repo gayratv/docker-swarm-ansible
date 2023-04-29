@@ -5,7 +5,8 @@
     build:
       path: "{{ git_repository_destination_dir }}"
 #      Specify the registry as part of the name or repository parameter.
-    name: "localhost:5000/{{ git_repository_name }}"
+#    name: "localhost:5000/{{ git_repository_name }}"
+    name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/{{ git_repository_name }}"
     tag: "{{ git_repository_version }}"
     push: true
     source: build

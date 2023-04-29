@@ -1,0 +1,9 @@
+---
+- hosts: manager
+#- hosts: worker
+#  vars:
+#    server_name: srvaaBB
+#    server_port: 33870
+#    master_node_ip: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}"
+  roles:
+    - roles/template-test

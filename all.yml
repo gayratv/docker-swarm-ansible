@@ -6,6 +6,7 @@
        ansible_user: root
    - preconfig-all
 
+
 # 02 Сделать преконфиг для хостов manager
 - hosts: manager
   roles:
@@ -13,6 +14,10 @@
     - docker-registry-install
     - role: swarm_init
       tags: swarm_init
+
+- hosts: all
+  roles:
+    - docker-insecure
 
 - hosts: worker
   roles:

@@ -1,0 +1,17 @@
+---
+# tasks file for roles/template-test
+- name: create dir /opt/template
+  ansible.builtin.file:
+    path: "/opt/template"
+    state: directory
+    owner: docker
+    group: docker
+    mode: '0777'  # Set directory permission
+  become: true
+
+- name: Copy configuration file template
+  vars:
+    master_node_ip: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}"
+  ansible.builtin.template:
+    src: docker-insecure.j2
+    dest: /opt/template/config.yml

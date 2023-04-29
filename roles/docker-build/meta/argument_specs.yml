@@ -2,7 +2,7 @@
 argument_specs:
   # roles main.yml entry point
   main:
-    short_description: Git clone argumnents
+    short_description: docker build argumnents
     options:
       git_repository_name:
         type: "str"

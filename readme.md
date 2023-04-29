@@ -77,8 +77,9 @@ ansible-playbook -i inventory ping.yml
 
 # init role
 ansible-galaxy init roles/preconfig-do
+ansible-galaxy init roles/template-test
 
-репозитарий с примером webserver
+# репозитарий с примером webserver
 https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/ansible-roles
 
 статья
@@ -206,3 +207,42 @@ tcp dpt:8080 to:172.19.0.2:8080
 https://dockerswarm.rocks/traefik/
 
 https://docs.docker.com/engine/swarm/networking/
+
+## Работа с template
+ansible-playbook -i inventory roles/template-test/tests/test.yml
+
+ansible-playbook -i inventory roles/docker-insecure/tests/test.yml
+
+## build service
+//ansible-playbook -i inventory roles/git-clone/tests/test.yml
+
+//ansible-playbook -i inventory roles/docker-build/tests/test.yml
+
+ansible-playbook -i inventory docker-build-role.yml
+
+cat /etc/docker/daemon.json
+cd /git-repos2/docker-show-ip
+
+docker image rm 38d65f2aa133
+
+docker build -t ip .
+docker build -t 10.16.0.2:5000/ip:latest .
+docker build -t localhost:5000/ip:latest .
+
+docker tag ip 10.16.0.2:5000/ip
+docker tag ip localhost:5000/ip
+
+docker push 10.16.0.2:5000/ip
+docker push localhots:5000/ip:latest
+
+docker info
+docker search 10.16.0.2:5000/ip
+
+curl -X GET http://10.16.0.2:5000/v2/_catalog
+curl -X GET http://localhost:5000/v2/_catalog
+
+docker image rm f23137cc45ee -f
+docker image rm f23137cc45ee -f
+
+
+docker pull 10.16.0.2:5000/docker-show-ip

@@ -1,6 +1,12 @@
 ---
 - hosts: manager
+  vars:
+    git_repository_name: "docker-show-ip"
+    git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
+    git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
+    git_repository_version: latest
+
   roles:
-    - git-clone
-    - docker-build
-    - docker-run
+    - role: git-clone
+    - role: docker-build
+#    - docker-run

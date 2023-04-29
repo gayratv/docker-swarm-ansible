@@ -1,0 +1,14 @@
+---
+- name: Copy docker insecure configuration file
+  vars:
+    master_node_ip: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}"
+  ansible.builtin.template:
+    src: docker-insecure.j2
+    dest: /etc/docker/daemon.json
+  become: true
+- name: Docker sudo systemctl restart docker
+  service:
+    name: docker
+    state: restarted
+    enabled: true
+  become: true
