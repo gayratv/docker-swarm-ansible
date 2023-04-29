@@ -9,3 +9,16 @@ Role Variables
 
 Ссылка на репозитарий
 Директория назначения
+Можно задать branch
+
+ansible-playbook -i inventory roles/git-clone-local/tests/test.yml
+
+
+sudo adduser docker
+groups docker
+
+sudo usermod -aG docker docker
+
+
+sudo adduser --gecos "" --disabled-password --ingroup docker docker
+sudo passwd docker

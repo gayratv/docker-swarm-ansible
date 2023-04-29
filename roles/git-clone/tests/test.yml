@@ -1,5 +1,5 @@
 ---
-- hosts: manager
+- hosts: localhost
 #  vars:
 #      git_repository_base_dir: "/git-repos2/"
 #      git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
@@ -7,8 +7,9 @@
 #      git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
   tasks:
   roles:
-    - role: roles/git-clone
-#      git_repository_base_dir: "/git-repos2/" - записал в глобальные
-      git_repository_name: "docker-show-ip"
+    - role: roles/git-clone-local
+      git_repository_base_dir: "/mnt/f/tempg/3/"
+      git_repository_name: "ip-show"
       git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
-      git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
+      git_repository_url: "https://github.com/gayratv/docker-swarm-ansible"
+      git_repository_branch: Docker_demo_3_IP
