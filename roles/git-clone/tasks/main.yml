@@ -24,3 +24,4 @@
     dest: "{{ git_repository_destination_dir }}"
     single_branch: yes
     version: "{{ git_repository_branch }}"
+    force: true

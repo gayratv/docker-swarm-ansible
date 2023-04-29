@@ -4,5 +4,5 @@
     - role: roles/docker-build
 #      vars:
       git_repository_version: latest
-      git_repository_name: "docker-show-ip"
+      git_repository_name: "ip-show"
       git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"

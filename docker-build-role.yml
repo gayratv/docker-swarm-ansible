@@ -1,11 +1,11 @@
 ---
 - hosts: manager
   vars:
-    git_repository_name: "docker-show-ip"
+    git_repository_name: "ip-show"
     git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
-    git_repository_url: "https://github.com/gayratv/AlariCode-docker-show-ip"
+    git_repository_branch: Docker_demo_3_IP
     git_repository_version: latest
-
+    git_repository_url: "https://github.com/gayratv/docker-swarm-ansible"
   roles:
     - role: git-clone
     - role: docker-build
