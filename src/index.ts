@@ -1,14 +1,16 @@
 import http from 'node:http';
 import { networkInterfaces } from 'node:os';
 import { IncomingMessage, ServerResponse } from 'node:http';
+import * as process from 'process';
 
 const port = 3000;
 
 const requestHandler = (request: IncomingMessage, res: ServerResponse) => {
-  const IPs = getIPs();
+  const IPs = getIPs() + `\n\n`;
   res.setHeader('Content-Type', 'application/json');
   res.statusCode = 200;
-  res.end(JSON.stringify(IPs));
+  // res.end(JSON.stringify(IPs));
+  res.end(IPs);
 };
 
 const server = http.createServer(requestHandler);
@@ -32,6 +34,12 @@ const getIPs = () => {
       }
     }
   }
-  results['descr'] = 'This is IP app from Docker';
-  return results;
+  results['descr'] = 'This is IP app from Docker1';
+
+  // Reflect.ownKeys(process.env).forEach((key: string) => {
+  //   console.log(process.env[key]);
+  // });
+  results['port'] = process.env.PORT_PARAM ?? 'null';
+
+  return JSON.stringify(results);
 };
