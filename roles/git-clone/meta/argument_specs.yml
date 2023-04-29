@@ -30,6 +30,7 @@ argument_specs:
       git_repository_branch:
         type: "str"
         required: false
-        default: "master"
+#        default указан в секции default/main.yml
+#        default: "master"
         description: "The string value"
 

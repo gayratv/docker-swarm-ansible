@@ -11,7 +11,7 @@ Role Variables
 Директория назначения
 Можно задать branch
 
-ansible-playbook -i inventory roles/git-clone-local/tests/test.yml
+ansible-playbook -i inventory roles/git-clone/tests/test.yml
 
 
 sudo adduser docker
