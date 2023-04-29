@@ -23,5 +23,5 @@
           replicas_max_per_node: 1
         replicas: 3
         env:
-          PORT_PARAM2: "8000"
+          PORT_PARAM: "8000"
   tags: "{{ name }}"
