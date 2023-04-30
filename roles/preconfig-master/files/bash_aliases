@@ -1,8 +1,11 @@
 alias l22='ls -la'
 alias dnls='docker node ls'
-alias dnia='docker node inspect ans1'
+alias dnia1='docker node inspect ans1'
+alias dnia2='docker node inspect ans2'
+alias dnia3='docker node inspect ans3'
 # показывает на каких нодах запущены контейнеры с сервисом
 alias dsps='docker service ps ip-show'
 alias dsls='docker service ls'
 # все контейнеры, включая те которые не работают
 alias dps='docker ps -a'
+alias ips='ip addr show'

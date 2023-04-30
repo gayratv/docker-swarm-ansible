@@ -15,7 +15,7 @@
         publish:
           - mode: ingress
             protocol: tcp
-            published_port: 3000
+#            published_port: 3000
             target_port: 3000
         placement:
 #          preferences:
@@ -23,7 +23,7 @@
 #          constraints:
 #            - node.role == manager
 #            - engine.labels.operatingsystem == ubuntu 14.04
-          replicas_max_per_node: 1
+          replicas_max_per_node: 2
         replicas: 3
         env:
           PORT_PARAM: "8000"
