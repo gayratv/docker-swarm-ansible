@@ -1,0 +1,8 @@
+alias l22='ls -la'
+alias dnls='docker node ls'
+alias dnia='docker node inspect ans1'
+# показывает на каких нодах запущены контейнеры с сервисом
+alias dsps='docker service ps ip-show'
+alias dsls='docker service ls'
+# все контейнеры, включая те которые не работают
+alias dps='docker ps -a'

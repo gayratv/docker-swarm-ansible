@@ -16,6 +16,14 @@
             mode: 0755
       become: true
 
+    - name: Copy bash_aliases
+#      nano ~/.bash_aliases
+      ansible.builtin.copy:
+        src: files/bash_aliases
+        dest: /home/docker/.bash_aliases
+        owner: docker
+        group: docker
+      tags: copy_bash_aliases
 
     - name: Завершение установки
       block:

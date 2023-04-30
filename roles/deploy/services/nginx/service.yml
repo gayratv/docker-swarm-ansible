@@ -1,6 +1,6 @@
 ---
 - name: "[{{ name }}] Конфигурация конфига"
-  include: "../config.yml"
+  include_tasks: "../config.yml"
   loop:
     - nginx.conf
   loop_control:

@@ -1,0 +1,5 @@
+---
+- hosts: manager
+  tags: copy_bash_aliases
+  roles:
+    - role: roles/preconfig-master

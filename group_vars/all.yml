@@ -41,5 +41,5 @@ git_repository_base_dir: "/git-repos2/"
 services:
   - name: ip-show
     version: latest
-#  - name: nginx
-#    version: latest
+  - name: nginx
+    version: latest

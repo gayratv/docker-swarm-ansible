@@ -7,6 +7,9 @@
         image: "{{ registry_name }}{{ name }}:{{ version }}"
         state: present
         force_update: true
+#  Time to wait before force killing a container.
+#  Accepts a duration as a string in a format that look like: 5h34m56s, 1m30s etc. The supported units are us, ms, s, m and h.
+        stop_grace_period: 1m
         networks:
           - name: "{{ network_name }}"
         publish:
