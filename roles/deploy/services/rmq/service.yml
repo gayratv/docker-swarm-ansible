@@ -1,14 +1,35 @@
 ---
 - name: "[{{ name }}] Выкладка сервиса"
   block:
+    - name: Create data volume
+      community.docker.docker_volume:
+        name: rmq_data_volume
+
+    - name: Create log volume
+      community.docker.docker_volume:
+        name: rmq_log_volume
+
     - name: "[{{ name }}] Выкладываем сервис"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
-        image: "rabbitmq:{{ version }}"
+        image: "rabbitmq:management"
         state: present
+        mounts:
+          - type: volume
+            source: rmq_data_volume
+            target: /var/lib/rabbitmq
+          - type: volume
+            source: rmq_log_volume
+            target: /var/log/rabbitmq
         networks:
           - name: "{{ network_name }}"
-        env:
-          - RABBITMQ_DEFAULT_USER={{ rmq.user }}
-          - RABBITMQ_DEFAULT_PASS={{ rmq.password }}
+        publish:
+          - mode: ingress
+            protocol: tcp
+            target_port:
+              - 5672
+              - 15672
+#        env:
+#          - RABBITMQ_DEFAULT_USER={{ rmq.user }}
+#          - RABBITMQ_DEFAULT_PASS={{ rmq.password }}
   tags: "{{ name }}"
