@@ -4,6 +4,7 @@
 # Два скрипта запустить
 ansible-playbook --flush-cache -i inventory all.yml
 
+ansible-playbook -i inventory roles/swarm_init/tests/test.yml
 ansible-playbook -i inventory swarm_join_test.yml
 
 ansible-playbook -i inventory docker-build-role.yml

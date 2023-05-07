@@ -14,21 +14,24 @@
         name: "{{ name }}"
         image: "rabbitmq:management"
         state: present
-        mounts:
-          - type: volume
-            source: rmq_data_volume
-            target: /var/lib/rabbitmq
-          - type: volume
-            source: rmq_log_volume
-            target: /var/log/rabbitmq
+#        mounts:
+#          - type: volume
+#            source: rmq_data_volume
+#            target: /var/lib/rabbitmq
+#          - type: volume
+#            source: rmq_log_volume
+#            target: /var/log/rabbitmq
         networks:
           - name: "{{ network_name }}"
         publish:
           - mode: ingress
             protocol: tcp
-            target_port:
-              - 5672
-              - 15672
+            published_port: 15672
+            target_port: 15672
+          - mode: ingress
+            protocol: tcp
+            target_port: 5672
+
 #        env:
 #          - RABBITMQ_DEFAULT_USER={{ rmq.user }}
 #          - RABBITMQ_DEFAULT_PASS={{ rmq.password }}

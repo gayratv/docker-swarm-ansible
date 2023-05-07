@@ -11,9 +11,17 @@ http {
 #			proxy_pass http://ip-show:3000;
 #		}
 
+#		location = /rmq {
+#			proxy_pass http://rmq:15672;
+#		}
+
 		location ~ (/) {
-			proxy_pass http://ip-show:3000;
+			proxy_pass http://rmq:15672;
 		}
-	}
+
+#		location ~ (/) {
+#			proxy_pass http://ip-show:3000;
+#		}
+#	}
 
 }
