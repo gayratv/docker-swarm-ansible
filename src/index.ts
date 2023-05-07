@@ -1,45 +1,61 @@
-import http from 'node:http';
-import { networkInterfaces } from 'node:os';
-import { IncomingMessage, ServerResponse } from 'node:http';
-import * as process from 'process';
+import { AMQPClient } from '@cloudamqp/amqp-client';
 
-const port = 3000;
+function delay(ms = 10_000) {
+  return new Promise((resolve) => {
+    setTimeout(() => resolve(0), ms);
+  });
+}
 
-const requestHandler = (request: IncomingMessage, res: ServerResponse) => {
-  const IPs = getIPs() + `\n\n`;
-  res.setHeader('Content-Type', 'application/json');
-  res.statusCode = 200;
-  // res.end(JSON.stringify(IPs));
-  res.end(IPs);
-};
+async function run() {
+  // try {
+  const amqp = new AMQPClient('amqp://rmq');
+  const conn = await amqp.connect();
+  const ch = await conn.channel();
 
-const server = http.createServer(requestHandler);
+  ch.basicQos(1, 0, false);
 
-server.listen(port, () => {
-  console.log(`Сервер запущен на порту ${port}`);
-});
+  // const q = await ch.queue('q1', { passive: false, durable: false, autoDelete: true });
+  const q = await ch.queue('q1', { passive: false, durable: false });
 
-const getIPs = () => {
-  const nets = networkInterfaces();
-  const results: Record<string, any> = {};
+  await ch.exchangeDeclare('ex1', 'direct', { durable: false });
 
-  for (const name of Object.keys(nets)) {
-    for (const net of nets[name]) {
-      // if (net.family === 'IPv4' && !net.internal) {
-      if (net.family === 'IPv4') {
-        if (!results[name]) {
-          results[name] = [];
-        }
-        results[name].push(net.address);
-      }
-    }
-  }
-  results['descr'] = 'This is IP app from Docker1';
+  await ch.queueBind('q1', 'ex1', 'q1routKey');
 
-  // Reflect.ownKeys(process.env).forEach((key: string) => {
-  //   console.log(process.env[key]);
-  // });
-  results['port'] = process.env.PORT_PARAM ?? 'null';
+  const consumer = await q.subscribe({ noAck: false }, async (msg) => {
+    console.log(msg.bodyToString());
+    console.log(msg.properties);
+    console.log(msg.deliveryTag);
+    await delay(1_000);
+    await ch.basicAck(msg.deliveryTag);
+    // await consumer.cancel();
+  });
 
-  return JSON.stringify(results);
-};
+  // await q.publish('Hello World', { deliveryMode: 2 });
+  await ch.basicPublish('ex1', 'q1routKey', 'exchange publish', {
+    deliveryMode: 1,
+    correlationId: '111',
+    replyTo: 'que to reply',
+    messageId: '805',
+    timestamp: new Date(),
+    type: 'returnProxy',
+  });
+
+  await ch.basicPublish('ex1', 'q1routKey', 'exchange publish', {
+    deliveryMode: 1,
+    correlationId: '112',
+    replyTo: 'que to reply2',
+    messageId: '11',
+    timestamp: new Date(),
+    type: 'returnProxy',
+  });
+
+  // await consumer.wait(); // will block until consumer is canceled or throw an error if server closed channel/connection
+  // await conn.close();
+  /*  } catch (e) {
+    console.error('ERROR', e);
+    e.connection.close();
+    setTimeout(run, 1000); // will try to reconnect in 1s
+  }*/
+}
+
+run();
