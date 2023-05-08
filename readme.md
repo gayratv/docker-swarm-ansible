@@ -2,7 +2,7 @@
 
 // мапит порт 4000 хоста на порт 3000 docker
 
-docker build -t ip-img .
+docker build -t rmq-test .
 
 docker run -d -p 4000:3000
 

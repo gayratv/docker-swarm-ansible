@@ -1,4 +1,7 @@
-import { AMQPClient } from '@cloudamqp/amqp-client';
+import dotenv from 'dotenv';
+dotenv.config();
+import { AMQPClient, AMQPError } from '@cloudamqp/amqp-client';
+import * as process from 'process';
 
 function delay(ms = 10_000) {
   return new Promise((resolve) => {
@@ -6,10 +9,19 @@ function delay(ms = 10_000) {
   });
 }
 
+const attmpCnt = 1;
+
 async function run() {
-  // try {
-  const amqp = new AMQPClient('amqp://rmq');
-  const conn = await amqp.connect();
+  console.log('RMQ HOST ', process.env.RMQ_HOST);
+  // const amqp = new AMQPClient('amqp://' + process.env.RMQ_HOST);
+  const amqp = new AMQPClient('amqp://' + process.env.RMQ_HOST);
+  let conn: AMQPClient;
+  try {
+    conn = (await amqp.connect()) as AMQPClient;
+  } catch (e) {
+    console.log(e.message);
+    process.exit(10);
+  }
   const ch = await conn.channel();
 
   ch.basicQos(1, 0, false);
@@ -48,14 +60,6 @@ async function run() {
     timestamp: new Date(),
     type: 'returnProxy',
   });
-
-  // await consumer.wait(); // will block until consumer is canceled or throw an error if server closed channel/connection
-  // await conn.close();
-  /*  } catch (e) {
-    console.error('ERROR', e);
-    e.connection.close();
-    setTimeout(run, 1000); // will try to reconnect in 1s
-  }*/
 }
 
 run();
