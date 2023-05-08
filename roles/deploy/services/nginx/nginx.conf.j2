@@ -4,12 +4,22 @@ events { worker_connections 1024; }
 
 http {
 	server {
-		listen 80;
+		listen 15672;
 		server_name image.local;
 
 		location ~ (/) {
 			proxy_pass http://rmq:15672;
 		}
 	}
+
+    server {
+        listen 80;
+        server_name image.local;
+
+        location ~ (/) {
+            proxy_pass http://ip-show:3000;
+        }
+    }
+
 
 }
