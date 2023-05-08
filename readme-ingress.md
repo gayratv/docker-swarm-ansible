@@ -15,6 +15,21 @@ docker service create --name whoami  -p 8000:80 --network app_network2 containou
 тестовый образ
 nicolaka/netshoot
 
+
+
+
+docker image prune -a -f                         Удалить все неиспользуемые Docker-образы:
+docker rmi -f $(docker images -q)                Принудительно удалить все Docker-образы
+docker container prune -f                        Удалить все остановленные (неиспользуемые) Docker-контейнеры:
+docker rm -f $(docker ps -a -q)                  Принудительно удалить все Docker-контейнеры, включая запущенные контейнеры:
+
+
+
+
+
+
+
+
 https://docker-tutorial.schoolofdevops.com/troubleshooting-toolkit/
 
 ### SWARM Networking Deep Dive

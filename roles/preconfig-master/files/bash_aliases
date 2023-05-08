@@ -4,10 +4,19 @@ alias dnia1='docker node inspect ans1'
 alias dnia2='docker node inspect ans2'
 alias dnia3='docker node inspect ans3'
 # показывает на каких нодах запущены контейнеры с сервисом
-alias dsps='docker service ps ip-show'
+alias dsps1='docker service ps ip-show'
+alias dsps='docker service ps'
 alias dsls='docker service ls'
 alias dils='docker image ls'
 # все контейнеры, включая те которые не работают
 alias dps='docker ps -a'
 alias ips='ip addr show'
 alias dslog='docker service logs'
+
+# docker image prune -a -f                         Удалить все неиспользуемые Docker-образы:
+alias diprune='docker image prune -a -f'
+#  Удалить все остановленные (неиспользуемые) Docker-контейнеры:
+alias dcprune='docker container prune -f'
+
+# docker exec -it f934aafd71c9 bash
+# docker exec -it f934aafd71c9 sh

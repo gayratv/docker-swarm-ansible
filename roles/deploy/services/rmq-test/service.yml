@@ -1,4 +1,10 @@
 ---
+- name: "[{{ name }}] Конфигурация конфига"
+  include_tasks: "../config.yml"
+  loop:
+    - env.conf
+  loop_control:
+    loop_var: config_item
 - name: "[{{ name }}] Выкладка сервиса"
   block:
     - name: "[{{ name }}] Выкладываем сервис"
@@ -25,4 +31,7 @@
 #            - engine.labels.operatingsystem == ubuntu 14.04
 #          replicas_max_per_node: 2
         replicas: 1
+        configs:
+          - config_name: env.conf
+            filename: "/node/.env"
   tags: "{{ name }}"
