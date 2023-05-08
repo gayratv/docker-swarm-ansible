@@ -1,7 +1,6 @@
 import dotenv from 'dotenv';
 dotenv.config();
 import { AMQPClient, AMQPError } from '@cloudamqp/amqp-client';
-import * as process from 'process';
 
 function delay(ms = 10_000) {
   return new Promise((resolve) => {
@@ -62,4 +61,5 @@ async function run() {
   });
 }
 
+console.log('RMQ HOST ', process.env.RMQ_HOST);
 run();

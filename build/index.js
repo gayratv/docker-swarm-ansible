@@ -1,13 +1,24 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import { AMQPClient } from '@cloudamqp/amqp-client';
 function delay(ms = 10_000) {
     return new Promise((resolve) => {
         setTimeout(() => resolve(0), ms);
     });
 }
+const attmpCnt = 1;
 async function run() {
-    // try {
-    const amqp = new AMQPClient('amqp://rmq');
-    const conn = await amqp.connect();
+    console.log('RMQ HOST ', process.env.RMQ_HOST);
+    // const amqp = new AMQPClient('amqp://' + process.env.RMQ_HOST);
+    const amqp = new AMQPClient('amqp://' + process.env.RMQ_HOST);
+    let conn;
+    try {
+        conn = (await amqp.connect());
+    }
+    catch (e) {
+        console.log(e.message);
+        process.exit(10);
+    }
     const ch = await conn.channel();
     ch.basicQos(1, 0, false);
     // const q = await ch.queue('q1', { passive: false, durable: false, autoDelete: true });
@@ -39,13 +50,7 @@ async function run() {
         timestamp: new Date(),
         type: 'returnProxy',
     });
-    // await consumer.wait(); // will block until consumer is canceled or throw an error if server closed channel/connection
-    // await conn.close();
-    /*  } catch (e) {
-      console.error('ERROR', e);
-      e.connection.close();
-      setTimeout(run, 1000); // will try to reconnect in 1s
-    }*/
 }
+console.log('RMQ HOST ', process.env.RMQ_HOST);
 run();
 //# sourceMappingURL=index.js.map
