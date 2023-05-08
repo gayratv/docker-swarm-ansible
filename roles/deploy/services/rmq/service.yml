@@ -1,13 +1,13 @@
 ---
 - name: "[{{ name }}] Выкладка сервиса"
   block:
-    - name: Create data volume
-      community.docker.docker_volume:
-        name: rmq_data_volume
-
-    - name: Create log volume
-      community.docker.docker_volume:
-        name: rmq_log_volume
+#    - name: Create data volume
+#      community.docker.docker_volume:
+#        name: rmq_data_volume
+#
+#    - name: Create log volume
+#      community.docker.docker_volume:
+#        name: rmq_log_volume
 
     - name: "[{{ name }}] Выкладываем сервис"
       community.docker.docker_swarm_service:

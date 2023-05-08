@@ -6,6 +6,8 @@ alias dnia3='docker node inspect ans3'
 # показывает на каких нодах запущены контейнеры с сервисом
 alias dsps='docker service ps ip-show'
 alias dsls='docker service ls'
+alias dils='docker image ls'
 # все контейнеры, включая те которые не работают
 alias dps='docker ps -a'
 alias ips='ip addr show'
+alias dslog='docker service logs'

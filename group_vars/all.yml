@@ -47,3 +47,5 @@ services:
     version: latest
   - name: rmq
     version: latest
+  - name: rmq-test
+    version: latest
