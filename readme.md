@@ -78,6 +78,7 @@ ansible-playbook -i inventory ping.yml
 # init role
 ansible-galaxy init roles/preconfig-do
 ansible-galaxy init roles/template-test
+ansible-galaxy init roles/docker-build2
 
 # репозитарий с примером webserver
 https://github.com/spacelift-io-blog-posts/Blog-Technical-Content/tree/master/ansible-roles
