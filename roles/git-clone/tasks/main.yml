@@ -18,7 +18,7 @@
     owner: docker
     state: directory
   become: true
-- name: Clone Git repository
+- name: "Clone Git repository {{ git_repository_name }}"
   git:
     repo: "{{ git_repository_url }}"
     dest: "{{ git_repository_destination_dir }}"

@@ -1,4 +1,3 @@
-alias l22='ls -la'
 alias dnls='docker node ls'
 alias dnia1='docker node inspect ans1'
 alias dnia2='docker node inspect ans2'
@@ -8,6 +7,7 @@ alias dsps1='docker service ps ip-show'
 # alias dsps='docker service ps' rmq-test
 alias dsps='docker service ps'
 alias dsls='docker service ls'
+alias dsrm='docker service rm'
 alias dils='docker image ls'
 # все контейнеры, включая те которые не работают
 alias dps='docker ps -a'

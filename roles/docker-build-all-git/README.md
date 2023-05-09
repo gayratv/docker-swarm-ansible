@@ -1,3 +1,10 @@
+ansible-playbook -i inventory docker-build-role-all-git.yml
+
+
+ansible-playbook -i inventory roles/swarm_init/tests/test.yml
+ansible-playbook roles/docker-build2/tests/test.yml
+ansible-playbook t-docker-build2.yml
+
 Role Name
 =========
 

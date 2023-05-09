@@ -1,0 +1,35 @@
+---
+# tasks file for roles/docker-build2
+- name: Git clone repos
+  vars:
+#    замена глобальной переменной
+#    git_repository_base_dir: "/mnt/f/_prg/docker/docker-swarm-ansible/git-clone/"
+
+    git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_loop_var.git_def.git_repository_name  }}"
+    git_repository_url: "{{ git_loop_var.git_def.git_repository_url }}"
+    git_repository_name: "{{ git_loop_var.git_def.git_repository_name }}"
+    git_repository_branch: "{{ git_loop_var.git_def.git_repository_branch }}"
+    git_repository_version: "{{ git_loop_var.git_def.git_repository_version }}"
+  include_role:
+    name: git-clone
+
+  loop: "{{ git_repos }}"
+  loop_control:
+    loop_var: git_loop_var
+
+- name: Docker build
+  vars:
+#    замена глобальной переменной
+#    git_repository_base_dir: "/mnt/f/_prg/docker/docker-swarm-ansible/git-clone/"
+
+    git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_loop_var.git_def.git_repository_name  }}"
+    git_repository_url: "{{ git_loop_var.git_def.git_repository_url }}"
+    git_repository_name: "{{ git_loop_var.git_def.git_repository_name }}"
+    git_repository_branch: "{{ git_loop_var.git_def.git_repository_branch }}"
+    git_repository_version: "{{ git_loop_var.git_def.git_repository_version }}"
+  include_role:
+    name: docker-build
+
+  loop: "{{ git_repos }}"
+  loop_control:
+    loop_var: git_loop_var

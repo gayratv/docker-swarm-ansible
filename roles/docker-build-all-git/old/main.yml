@@ -1,0 +1,34 @@
+---
+# tasks file for roles/docker-build2
+- name: Print1
+  ansible.builtin.debug:
+    msg:
+      - "{{ git_repository_base_dir }}"
+- name: Print2
+  ansible.builtin.debug:
+    msg:
+      - "{{  git_repos[0].git_def.git_repository_name }}"
+      - "{{  git_repos[1].git_def.git_repository_name }}"
+
+
+- name: Print3
+  debug:
+    msg:
+      - " repo name: {{ git_loop_var.git_def.git_repository_name  }} "
+  loop: "{{ git_repos }}"
+  loop_control:
+    loop_var: git_loop_var
+
+#- name: Print4
+#  debug:
+#    msg:
+#      - " name: {{ item[0] }} "
+##    priv: "{{ item[1] }}.*:ALL"
+#  loop: "{{ ['alice', 'bob'] | product(['clientdb', 'employeedb', 'providerdb']) | list }}"
+
+
+#- name: Print3
+#  loop:
+#    git_repos
+#  loop_control:
+#    loop_var: git_item
