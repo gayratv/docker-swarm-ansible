@@ -1,0 +1,11 @@
+---
+rmq:
+  user: admin
+  password: admin
+
+mysql:
+  port: 3306
+  host: .beget.app
+  user: g
+  password: 'm5'
+  dbname: gg

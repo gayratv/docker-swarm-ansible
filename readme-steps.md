@@ -7,8 +7,7 @@ ansible-playbook --flush-cache -i inventory all.yml
 ansible-playbook -i inventory roles/swarm_init/tests/test.yml
 ansible-playbook -i inventory swarm_join_test.yml
 
-ansible-playbook -i inventory docker-build-role.yml
-ansible-playbook -i inventory docker-build-role2.yml
+ansible-playbook -i inventory docker-build-role-all-git.yml
 
 ansible-playbook -i inventory deploy-role.yml
 

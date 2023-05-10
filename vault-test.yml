@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Print1
+      debug:
+        msg:
+          - "{{ rmq_defaults[0].value }}"
+          - "{{ rmq_defaults[1].value }}"
+          - "{{ mysql.port }}"
+
