@@ -14,6 +14,11 @@ ansible-vault create --vault-id dev@.pass group_vars/vault.yml
 
 .pass - название файла с паролем
 
+## Create a service with secrets (--secret)
+docker service create --name redis --secret secret.json redis:3.0.6
+
+--secret source=ssh-key,target=ssh \
+
 ansible-playbook -i inventory all.yml --tags "deploy" --ask-vault-pass
 
 ansible-vault encrypt group_vars/all/vault.yml --vault-id dev@prompt

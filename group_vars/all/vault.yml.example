@@ -3,9 +3,29 @@ rmq:
   user: admin
   password: admin
 
-mysql:
-  port: 3306
-  host: .beget.app
-  user: g
-  password: 'm5'
-  dbname: gg
+
+proxy_manager:
+  MYSQL_PORT: 3306
+  MYSQL_HOST: p.beget.app
+  MYSQL_USER: ggv
+  MYSQL_PASSWORD: '****'
+  MYSQL_DBNAME: db1
+  RMQ_HOST: rmq
+  #: если true - то грузится только 5 прокси
+  DEBUG_POOL: true
+
+proxy_manager2:
+  - name: MYSQL_PORT
+    value: 3306
+  - name: MYSQL_HOST
+    value: 1.beget.app
+  - name: MYSQL_USER
+    value: g
+  - name: MYSQL_PASSWORD
+    value: '***'
+  - name: MYSQL_DBNAME
+    value: gg
+  - name: RMQ_HOST
+    value: rmq
+  - name: DEBUG_POOL
+    value: false

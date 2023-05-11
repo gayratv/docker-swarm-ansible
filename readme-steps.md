@@ -7,9 +7,10 @@ ansible-playbook --flush-cache -i inventory all.yml
 ansible-playbook -i inventory roles/swarm_init/tests/test.yml
 ansible-playbook -i inventory swarm_join_test.yml
 
-ansible-playbook -i inventory docker-build-role-all-git.yml
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  docker-build-role-all-git.yml
 
-ansible-playbook -i inventory deploy-role.yml
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  deploy-role.yml
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  deploy-role2.yml
 
 
 # Выполнить только один скрипт

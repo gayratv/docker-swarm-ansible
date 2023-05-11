@@ -1,0 +1,4 @@
+---
+# tasks file for secret-test2
+- name: "[{{ name }}] Конфигурация секрета"
+  include_tasks: "../../deploy/services/secret.yml"

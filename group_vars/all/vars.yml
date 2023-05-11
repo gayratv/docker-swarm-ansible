@@ -47,6 +47,8 @@ services:
     version: latest
   - name: rmq-test
     version: latest
+  - name: proxy-manager
+    version: latest
 
 
 #  - name: whoami

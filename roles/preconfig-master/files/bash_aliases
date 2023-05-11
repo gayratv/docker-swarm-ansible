@@ -19,6 +19,8 @@ alias dslog='docker service logs'
 alias diprune='docker image prune -a -f'
 #  Удалить все остановленные (неиспользуемые) Docker-контейнеры:
 alias dcprune='docker container prune -f'
+alias dsls='docker secret ls'
+alias dsi='docker secret inspect'
 
 # docker exec -it b9d0b83e2707 bash
 # docker exec -it a6c2e972d189 sh
