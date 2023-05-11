@@ -10,4 +10,5 @@
   vars:
     - name: "{{ item.name }}"
     - version: "{{ item.version }}"
+# services находится в vars задачи
   loop: "{{ services }}"

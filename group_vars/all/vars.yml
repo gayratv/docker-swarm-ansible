@@ -38,17 +38,6 @@ git_repository_base_dir: "/git-repos2/"
 #docker_image_name: "localhost:5000/{{ git_repository_name }}:{{ git_repository_version  }}"
 
 
-services:
-  - name: ip-show
-    version: latest
-  - name: nginx
-    version: latest
-  - name: rmq
-    version: latest
-  - name: rmq-test
-    version: latest
-  - name: proxy-manager
-    version: latest
 
 
 #  - name: whoami

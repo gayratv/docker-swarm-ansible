@@ -1,0 +1,9 @@
+---
+all:
+  hosts:
+    jin1:
+      ansible_host: ovz1.j4547248.gmzem.vps.myjino.ru
+      ansible_port: 49198
+  vars:
+    ansible_user: docker
+    ansible_connection: local

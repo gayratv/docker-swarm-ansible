@@ -1,0 +1,4 @@
+---
+- hosts: all
+  roles:
+    - roles/users-add

@@ -2,7 +2,7 @@
 - name: Create new user and group
   block:
     - name: Create the group
-      group:
+      ansible.builtin.group:
          name: "{{ new_user_group }}"
          state: present
     - name: Add the user "{{ create_new_user_name_to_add }}"
@@ -21,11 +21,11 @@
 
     - name: Allow user to run any command with sudo without password prompt
       lineinfile:
-              path: /etc/sudoers.d/allow_user
-              line: '{{ create_new_user_name_to_add }} ALL=(ALL) NOPASSWD: ALL'
-              create: yes
-              state: present
-              mode: '0440'
+        path: /etc/sudoers.d/allow_user
+        line: '{{ create_new_user_name_to_add }} ALL=(ALL) NOPASSWD: ALL'
+        create: yes
+        state: present
+        mode: '0440'
 
 
   become: true

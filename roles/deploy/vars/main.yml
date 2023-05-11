@@ -1,2 +1,15 @@
 ---
 registry_name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/"
+
+
+services:
+  - name: ip-show
+    version: latest
+  - name: nginx
+    version: latest
+  - name: rmq
+    version: latest
+  - name: rmq-test
+    version: latest
+  - name: proxy-manager
+    version: latest
