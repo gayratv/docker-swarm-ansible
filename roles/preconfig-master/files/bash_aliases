@@ -22,6 +22,6 @@ alias dcprune='docker container prune -f'
 alias dsls='docker secret ls'
 alias dsi='docker secret inspect'
 
-# docker exec -it b9d0b83e2707 bash
+# docker exec -it b5ebdfe6cb46 sh
 # docker exec -it a6c2e972d189 sh
 # docker exec -it 7b1b08825bfe sh

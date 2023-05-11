@@ -12,6 +12,16 @@ http {
 		}
 	}
 
+# пробросить запросы к RMQ
+	server {
+		listen 5672;
+		server_name image.local;
+
+		location ~ (/) {
+			proxy_pass http://rmq:5672;
+		}
+	}
+
     server {
         listen 80;
         server_name image.local;
