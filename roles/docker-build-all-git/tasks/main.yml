@@ -13,6 +13,7 @@
   include_role:
     name: git-clone
 
+# git_repos - в переменых задачи
   loop: "{{ git_repos }}"
   loop_control:
     loop_var: git_loop_var

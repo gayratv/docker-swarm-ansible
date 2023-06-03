@@ -4,6 +4,11 @@
 
 - name: "[{{ name }}] Выкладка сервиса"
   block:
+#    - name: logging_options_prox_manager
+#      set_fact:
+#        logging_options_prox_manager:
+#          max-size: "10k"
+#          max-file: "3"
     - name: "[{{ name }}] Выкладываем сервис"
       community.docker.docker_swarm_service:
         name: "{{ name }}"
@@ -12,12 +17,20 @@
         force_update: true
         networks:
           - name: "{{ network_name }}"
-        publish:
-          - mode: ingress
-            protocol: tcp
+#        publish:
+#          - mode: ingress
+#            protocol: tcp
 #            published_port: 3002
-            target_port: 15701
+#            target_port: 15701
         secrets:
           - secret_name: "{{ name }}.env"
             filename: "/node/.env"
+        logging:
+          driver: json-file
+          options:
+            max-size: "100k"
+            max-file: "3"
+#          options: "{{ logging_options_prox_manager }}"
+
+
   tags: "{{ name }}"

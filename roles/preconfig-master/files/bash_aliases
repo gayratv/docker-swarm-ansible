@@ -10,10 +10,12 @@ alias dsls='docker service ls'
 alias dsrm='docker service rm'
 alias dils='docker image ls'
 # все контейнеры, включая те которые не работают
-alias dps='docker ps -a'
+alias dpsa='docker ps -a'
+alias dps='docker ps'
 alias ips='ip addr show'
 alias dslog='docker service logs'
 # dslog nginx
+# docker service logs --clear <service_id_or_name>
 
 # docker image prune -a -f                         Удалить все неиспользуемые Docker-образы:
 alias diprune='docker image prune -a -f'

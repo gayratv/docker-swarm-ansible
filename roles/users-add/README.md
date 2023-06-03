@@ -7,11 +7,12 @@ ansible-playbook -i inventory roles/users-add/tests/test.yml --ask-pass
 q6L?573Jfv8L
 
 
+sudo usermod -aG sudo docker
+sudo adduser username groupname
+
 sudo groupadd docker
 sudo useradd -m -g docker docker
-sudo usermod -aG sudo docker
 
-sudo adduser username groupname
 
 
 sudo usermod -a -G group_name username

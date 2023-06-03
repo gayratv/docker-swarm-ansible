@@ -2,10 +2,14 @@
 --flush-cache clear the fact cache for every host in inventory
 
 # Два скрипта запустить
-ansible-playbook --flush-cache -i inventory all.yml
+ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all.yml
 
-ansible-playbook -i inventory roles/swarm_init/tests/test.yml
-ansible-playbook -i inventory swarm_join_test.yml
+### Если завис полсле перезагрузи то начать со второго шага
+ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all-from02.yml
+ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all-from03.yml
+
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  roles/swarm_init/tests/test.yml
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass swarm_join_test.yml
 
 ### Закачать репозитарии и сбилдить образы
 ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  docker-build-role-all-git.yml

@@ -6,13 +6,13 @@
     state: directory
   become: true
 #  and the destination directory must be empty.
-- name: Delete target directory if it exists
+- name: Delete target directory if it exists "{{ git_repository_destination_dir }}"
   file:
     path: "{{ git_repository_destination_dir }}"
     state: absent
 #      ignore_errors:
   become: true
-- name: Create target directory
+- name: Create target directory "{{ git_repository_destination_dir }}"
   file:
     path: "{{ git_repository_destination_dir }}"
     owner: docker

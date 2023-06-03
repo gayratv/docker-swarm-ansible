@@ -1,0 +1,18 @@
+---
+# 02 Сделать преконфиг для хостов manager
+- hosts: manager
+  roles:
+    - preconfig-master
+    - docker-registry-install
+    - role: swarm_init
+      tags: swarm_init
+
+- hosts: all
+  roles:
+    - docker-insecure
+
+- hosts: worker
+  roles:
+    - role: swarm_join
+      type: worker
+      tags: swarm_join

@@ -25,10 +25,13 @@ docker rm -f $(docker ps -a -q)                  Принудительно уд
 
 
 
+### Remove containers on swarm service scale down
+https://github.com/moby/swarmkit/issues/1372
 
+#### Эта команда уменьшает размер истории запуска контейнера
+docker swarm update --task-history-limit 3
 
-
-
+### Troubleshooting Toolkit
 
 https://docker-tutorial.schoolofdevops.com/troubleshooting-toolkit/
 

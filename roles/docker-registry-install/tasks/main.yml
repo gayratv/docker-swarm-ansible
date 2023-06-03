@@ -1,7 +1,7 @@
 ---
 # tasks file for roles/docker-registry-install
 - name: Create Docker Registry
-  docker_container:
+  community.general.docker_container:
     name: registry
     image: registry:latest
     state: started
