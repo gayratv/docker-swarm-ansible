@@ -1,0 +1,19 @@
+---
+# Клонировать репозиторий
+- hosts: manager
+  vars:
+    git_repository_base_dir: "/git-repos2/"
+    git_repository_url: "git@github.com:gayratv/playwright-docker2"
+    git_repository_name: "avito"
+    git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
+    git_repository_branch: master
+    git_repository_version: latest
+
+  roles:
+#    - role: git-clone
+
+# для build нужна переменная
+# {{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}
+# Эта переменная образуется при swarm init
+    - role: docker-build
+

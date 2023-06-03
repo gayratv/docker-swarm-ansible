@@ -19,9 +19,12 @@
     state: directory
   become: true
 - name: "Clone Git repository {{ git_repository_name }}"
-  git:
+  ansible.builtin.git:
     repo: "{{ git_repository_url }}"
     dest: "{{ git_repository_destination_dir }}"
     single_branch: yes
     version: "{{ git_repository_branch }}"
     force: true
+#    key_file: "~/.ssh/github/id_rsa"
+#    Options git will pass to ssh when used as protoco
+#    ssh_opts: "-o IdentitiesOnly=yes -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null"

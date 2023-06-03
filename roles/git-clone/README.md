@@ -1,24 +1,22 @@
-Role Name
+git-clone
 =========
 
 Клонирует репозитарий в директорию
- covered by Ansible itself or the role should be mentioned here. For instance, if the role uses the EC2 module, it may be a good idea to mention in this section that the boto package is required.
+ 
 
 Role Variables
 --------------
+
+    эта переменная есть в глобальных переменных - не указывать
+      // git_repository_base_dir: "/git-repos2/"
+      git_repository_url: "https://github.com/gayratv/docker-swarm-ansible"
+      git_repository_name: "ip-show"
+      git_repository_destination_dir: "{{ git_repository_base_dir }}{{ git_repository_name  }}"
+      git_repository_branch: Docker_demo_3_IP
+
 
 Ссылка на репозитарий
 Директория назначения
 Можно задать branch
 
 ansible-playbook -i inventory roles/git-clone/tests/test.yml
-
-
-sudo adduser docker
-groups docker
-
-sudo usermod -aG docker docker
-
-
-sudo adduser --gecos "" --disabled-password --ingroup docker docker
-sudo passwd docker
