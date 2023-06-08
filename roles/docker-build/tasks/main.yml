@@ -1,5 +1,12 @@
 ---
 # tasks file for roles/docker-build
+- name: "Remove an image {{ git_repository_name }}"
+  community.docker.docker_image:
+    state: absent
+    name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/{{ git_repository_name }}"
+    tag: "{{ git_repository_version }}"
+    #   Use with state absent to un-tag and remove all images matching the specified name.
+    force_absent: true
 - name: "Build an image and push it to a private repo {{ git_repository_name }}"
   community.docker.docker_image:
     build:
@@ -9,6 +16,8 @@
     name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/{{ git_repository_name }}"
     tag: "{{ git_repository_version }}"
     push: true
+#   Use with state absent to un-tag and remove all images matching the specified name.
+    force_absent: true
 # без force не будет build при обновлении репозитария
     force_source: true
     force_tag: true

@@ -1,0 +1,67 @@
+---
+- name: "[{{ name }}] Конфигурация секрета"
+  include_tasks: "../secret.yml"
+
+- name: "Image name"
+  debug:
+    msg: "Image: {{ registry_name }}{{ name }}:{{ version }}"
+
+- name: Create Docker Volume
+  docker_volume:
+    name: cache_vol
+    state: present
+
+
+- name: "[{{ name }}] Выкладка сервиса"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
+        state: present
+        force_update: true
+
+        mounts:
+          - source: /node/src
+            target: /node/src
+            type: bind
+          - source: /node/dist-avito
+            target: /node/dist-avito
+            type: bind
+          - type: volume
+            source: cache_vol
+            target: /node/cache
+
+        restart_config:
+          condition: any
+          delay: 5s
+          max_attempts: 2147483647
+
+#  Time to wait before force killing a container.
+#  Accepts a duration as a string in a format that look like: 5h34m56s, 1m30s etc. The supported units are us, ms, s, m and h.
+#        stop_grace_period: 1m
+
+        networks:
+          - name: "{{ network_name }}"
+        secrets:
+          - secret_name: "{{ name }}.env"
+            filename: "/node/.env"
+        logging:
+          driver: json-file
+          options:
+            max-size: "100k"
+            max-file: "3"
+        limits:
+          memory: 512M
+
+#        placement:
+#          preferences:
+#            - spread: node.labels.mylabel
+#          constraints:
+#            - node.role: manager
+#            - engine.labels.operatingsystem == ubuntu 14.04
+#          replicas_max_per_node: 2
+        replicas: 1
+#        env:
+#          PORT_PARAM: "8000"
+  tags: "{{ name }}"

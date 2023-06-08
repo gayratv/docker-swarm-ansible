@@ -5,25 +5,28 @@ alias dnia3='docker node inspect ans3'
 # показывает на каких нодах запущены контейнеры с сервисом
 alias dsps1='docker service ps ip-show'
 # alias dsps='docker service ps' rmq-test
-alias dsps='docker service ps'
-alias dsls='docker service ls'
-alias dsrm='docker service rm'
-alias dils='docker image ls'
+alias dsls='echo "docker service ls" && docker service ls'
+alias dsps='echo "docker service ps" && docker service ps'
+alias dsrm='echo "docker service rm" && docker service rm'
+alias dils='echo "docker image ls" && docker image ls'
 # все контейнеры, включая те которые не работают
-alias dpsa='docker ps -a'
-alias dps='docker ps'
-alias ips='ip addr show'
-alias dslog='docker service logs'
+alias dps='echo "docker ps" && docker ps'
+alias dpsa='echo "docker ps -a" && docker ps -a'
+alias ips='echo "ip addr show" && ip addr show'
+alias dslog='echo "docker service logs" && docker service logs'
 # dslog nginx
 # docker service logs --clear <service_id_or_name>
 
 # docker image prune -a -f                         Удалить все неиспользуемые Docker-образы:
-alias diprune='docker image prune -a -f'
+alias diprune='echo "docker image prune -a -f" && docker image prune -a -f'
 #  Удалить все остановленные (неиспользуемые) Docker-контейнеры:
-alias dcprune='docker container prune -f'
-alias dsls='docker secret ls'
-alias dsi='docker secret inspect'
+alias dcprune='echo "docker container prune -f" && docker container prune -f'
+alias dsecretls='echo "docker secret ls" && docker secret ls'
+alias dsi='echo "docker secret inspect" && docker secret inspect'
 
-# docker exec -it b5ebdfe6cb46 sh
+alias dslogf='echo "docker service logs --follow avito-heat" && docker service logs --follow avito-heat'
+
+# docker exec -it e469a8975ee3 /bin/bash
 # docker exec -it a6c2e972d189 sh
 # docker exec -it 7b1b08825bfe sh
+# docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat:latest" | head -n 1) /bin/bash

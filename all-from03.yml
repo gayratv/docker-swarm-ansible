@@ -1,9 +1,0 @@
----
-# 03 продолжаем после prconfig master
-- hosts: manager
-  roles:
-    - docker-registry-install
-
-- hosts: all
-  roles:
-    - docker-insecure
