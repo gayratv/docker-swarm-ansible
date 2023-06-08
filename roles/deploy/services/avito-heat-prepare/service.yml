@@ -1,0 +1,45 @@
+---
+- name: "[{{ name }}] Конфигурация секрета"
+  include_tasks: "../secret.yml"
+
+- name: "Image name"
+  debug:
+    msg: "Image: {{ registry_name }}{{ name }}:{{ version }}"
+
+- name: "[{{ name }}] Выкладка сервиса"
+  block:
+    - name: "[{{ name }}] Выкладываем сервис"
+      community.docker.docker_swarm_service:
+        name: "{{ name }}"
+        image: "{{ registry_name }}{{ name }}:{{ version }}"
+        state: present
+        force_update: true
+
+        mounts:
+          - source: /node/dist-node18
+            target: /node/dist-node18
+            type: bind
+
+        restart_config:
+          condition: any
+          delay: 5s
+          max_attempts: 2147483647
+
+        networks:
+          - name: "{{ network_name }}"
+        secrets:
+          - secret_name: "{{ name }}.env"
+            filename: "/node/.env"
+        logging:
+          driver: json-file
+          options:
+            max-size: "100k"
+            max-file: "3"
+        limits:
+          memory: 128M
+
+        placement:
+          constraints:
+            - node.role: manager
+        replicas: 1
+  tags: "{{ name }}"

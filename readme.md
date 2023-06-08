@@ -7,6 +7,8 @@
 
 ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass avito-build-deploy.yml
 
+ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass avito-heat-prepare.yml
+
 ## Перечень задач
 ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass --tags "avito-heat" --list-tasks  docker-build-clone-avito.yml
 
