@@ -25,6 +25,7 @@ alias dsecretls='echo "docker secret ls" && docker secret ls'
 alias dsi='echo "docker secret inspect" && docker secret inspect'
 
 alias dslogf='echo "docker service logs --follow avito-heat" && docker service logs --follow avito-heat'
+alias aprep='docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat-prepare:latest" | head -n 1) /bin/bash'
 
 # docker exec -it e469a8975ee3 /bin/bash
 # docker exec -it a6c2e972d189 sh

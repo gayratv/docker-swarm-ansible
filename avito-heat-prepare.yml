@@ -10,12 +10,12 @@
     git_repository_version: latest
 
   roles:
-    - role: git-clone
+#    - role: git-clone
 
 # для build нужна переменная
 # {{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}
 # Эта переменная образуется при swarm init
 #     ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass  roles/swarm_init/tests/test.yml
-    - role: docker-build
+#    - role: docker-build
     - role: deploy
 

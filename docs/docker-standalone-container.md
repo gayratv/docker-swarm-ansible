@@ -104,3 +104,53 @@ docker exec -it 1f5f626837d8 /bin/bash
 
 docker exec -it $(docker ps -qf "ancestor=node:18" | head -n 1) /bin/bash
 docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat:latest" | head -n 1) /bin/bash
+docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat-prepare:latest" | head -n 1) /bin/bash
+
+docker service logs --follow avito-heat-prepare 
+
+
+/// В контейнер Node 18 подготовить sh файл:
+aprep
+
+#!/bin/bash
+cd /node && /usr/bin/node  /node/dist-node18/prepare_heat_jobs.mjs
+
+chmod +x prepare_heat_jobs.sh
+./prepare_heat_jobs.sh
+
+// на node 
+
+
+******* prepare_heat_jobs.sh *********
+#!/bin/bash
+docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat-prepare:latest" | head -n 1) /node/dist-node18/prepare_heat_jobs.sh &>> prepare-heat.log
+******* prepare_heat_jobs.sh *********
+
+docker exec -it $(docker ps -qf "ancestor=10.16.0.2:5000/avito-heat-prepare:latest" | head -n 1) /bin/bash
+
+chmod +x /node/dist-node18/prepare_heat_jobs.sh
+
+35 18 * * * /bin/bash /home/docker/prepare_heat_jobs.sh &>> cron.log
+04 3 * * * /home/docker/prepare_heat_jobs.sh
+
+0 16 * * * /home/docker/prepare_heat_jobs.sh
+0 12 * * * /home/docker/prepare_heat_jobs.sh
+0 7 * * * /home/docker/prepare_heat_jobs.sh
+
+15-18
+
+truncate -s 0 prepare-heat.log
+cat cron.log && echo "prepare-heat.log" && cat prepare-heat.log
+
+sudo truncate -s 0 /var/log/syslog
+sudo tail -f /var/log/syslog
+
+sudo grep CRON /var/log/syslog
+
+
+***** Рабочая версия  ********************************************
+0 16 * * * /home/docker/prepare_heat_jobs.sh
+0 12 * * * /home/docker/prepare_heat_jobs.sh
+0 7 * * * /home/docker/prepare_heat_jobs.sh
+
+*************************************************

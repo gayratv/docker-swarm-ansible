@@ -38,8 +38,8 @@
         limits:
           memory: 128M
 
-        placement:
-          constraints:
-            - node.role: manager
+#        placement:
+#          constraints:
+#            - node.role: manager
         replicas: 1
   tags: "{{ name }}"
