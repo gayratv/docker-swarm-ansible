@@ -4,8 +4,11 @@
 # Два скрипта запустить
 ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all.yml
 
-# Проверка IP
-ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm-init-get-master-ip.yml
+ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm-init-show-token.yml
+
+ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm_init_role_test.yml
+
+
 
 ### Если завис полсле перезагрузи то начать со второго шага
 ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all-from02.yml

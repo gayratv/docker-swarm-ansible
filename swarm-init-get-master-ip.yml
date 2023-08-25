@@ -6,5 +6,18 @@
 #  gather_facts: no
   tasks:
     - name: Display token_manager
+#      debug:
+#        var: "hostvars['master']['ansible_facts']['token_worker']"
       debug:
-        var: "hostvars['master']['ansible_facts']['token_worker']"
+        msg:
+#          var1: "{{ hostvars['master']['ansible_facts']['token_worker'] }}"
+          var2: "{{ ansible_facts.default_ipv4.address }}"
+#          var2: "{{ ansible_facts.all_ipv4_addresses }}"
+
+    - name: Сохранение токенов
+      set_fact:
+        master_ip4_beget_private_network: "{{ ansible_facts.default_ipv4.address }}"
+        cacheable: true
+#       ---- ansible_fact_caching: true
+
+
