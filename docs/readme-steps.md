@@ -4,9 +4,10 @@
 # Два скрипта запустить
 ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass all.yml
 
-ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm-init-show-token.yml
-
-ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm_init_role_test.yml
+была проблема в swarm_init - поправил
+//ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm-init-show-token.yml
+//ansible-playbook --flush-cache -i inventory --vault-password-file ~/gayrat/.pass swarm_init_role_test.yml
+// ansible-playbook -i inventory --vault-password-file ~/gayrat/.pass test-swarm-join.yml
 
 
 
@@ -30,5 +31,5 @@ ansible-playbook --flush-cache -i inventory all.yml --tags swarm_init
  
 
 # Проверка работы registry
-curl -X GET http://10.16.0.2:5000/v2/_catalog
+curl -X GET http://212.113.120.139:5000/v2/_catalog
 curl -X GET http://localhost:5000/v2/_catalog

@@ -2,7 +2,8 @@
 - name: Подключение
   community.docker.docker_swarm:
     state: join
-    remote_addrs: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}"
+    remote_addrs: "{{ hostvars['master']['ansible_facts']['default_ipv4']['address'] }}"
+#    join_token: "{{ hostvars['master']['ansible_facts']['token_worker'] }}"
     join_token: >
       {{
         hostvars['master']['ansible_facts']['token_worker']

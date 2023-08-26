@@ -1,5 +1,6 @@
 ---
-registry_name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/"
+#registry_name: "{{ hostvars['master']['ansible_facts']['master_ip4_beget_private_network'] }}:5000/"
+registry_name: ""{{ hostvars['master']['ansible_facts']['default_ipv4']['address'] }}:5000/"
 
 services:
 #   - name: avito-heat
