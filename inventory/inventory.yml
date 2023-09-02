@@ -12,7 +12,7 @@ all:
           ansible_host: 95.214.62.52
       
         ans2:
-          ansible_host: 62.217.176.109
+          ansible_host: 188.225.79.161
       
   vars:
 #    ansible_user: docker

@@ -6,4 +6,8 @@
   tasks:
     - name: Display token_manager
       debug:
-        var: "hostvars['master']['ansible_facts']['token_worker']"
+#        var: "hostvars['master']['ansible_facts']['token_worker']"
+        msg:
+#          - "{{ hostvars['master']['ansible_facts'] }}"
+          - "{{ hostvars['master']['ansible_facts']['default_ipv4']['address'] }}"
+          - "{{hostvars['master']['ansible_facts']['eth0']['ipv4']['address']}}"

@@ -2,20 +2,20 @@
 #- name: Clear cached facts
 #  ansible_cache_plugin:
 #    clear: true
+- name: advertise_addr_var
+  debug:
+    msg: "{{ advertise_addr }}"
 - name: Инициализация swarm
   community.docker.docker_swarm:
     state: present
-#    10.16.0.2
-    advertise_addr: "{{ ansible_facts.eth1.ipv4.address }}"
+#    для timeweb - определили в VARs - файл vars/main.yml
   register: token
-#  debug:
-#    var: token
 
 - name: Сохранение токенов
   set_fact:
     token_manager: "{{ token.swarm_facts.JoinTokens.Manager }}"
     token_worker: "{{ token.swarm_facts.JoinTokens.Worker }}"
-    master_ip4_beget_private_network:   "{{ ansible_facts.eth1.ipv4.address }}"
+    master_ip4_beget_private_network:  "{{ advertise_addr }}"
     cacheable: true
     ansible_fact_caching: true
 

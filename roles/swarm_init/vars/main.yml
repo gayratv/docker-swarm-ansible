@@ -1,0 +1,4 @@
+---
+advertise_addr_var:  "{{ hostvars['master']['ansible_facts']['default_ipv4']['address'] }}"
+advertise_addr:  "{{ hostvars['master']['ansible_facts']['default_ipv4']['address'] }}"
+

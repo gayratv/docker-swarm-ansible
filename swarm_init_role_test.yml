@@ -1,7 +1,7 @@
 ---
 - hosts: manager
-#  roles:
-#    - swarm_init
+  roles:
+    - swarm_init
   tasks:
 #    - name: print
 #      debug:
@@ -9,6 +9,6 @@
 #    - name: token_manager
 #      debug:
 #          var: token_manager
-    - name: msg hostvars['master'] token_worker
-      debug:
-        msg: "{{hostvars['master']['ansible_facts']['token_worker']}}"
+#    - name: msg hostvars['master'] token_worker
+#      debug:
+#        msg: "{{hostvars['master']['ansible_facts']['token_worker']}}"
